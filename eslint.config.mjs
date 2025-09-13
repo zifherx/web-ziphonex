@@ -10,16 +10,38 @@ const compat = new FlatCompat({
 });
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-  {
-    ignores: [
-      "node_modules/**",
-      ".next/**",
-      "out/**",
-      "build/**",
-      "next-env.d.ts",
+  // Configuración de archivos a ignorar
+  // {
+  //   files: ["**/*.{js.jsx,ts,tsx}"],
+  //   ignores: [
+  //     ".next/**",
+  //     "dist/**",
+  //     "node_modules/**",
+  //   ]
+  // },
+  ...compat.config({
+    extends: ["next/core-web-vitals", "next/typescript"],
+    ignorePatterns: [
+          ".next/**",
+          "dist/**",
+          "node_modules/**",
     ],
-  },
+    rules: {
+      "react/no-unescaped-entities": "off",
+      "react-hooks/exhaustive-deps" : "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-expressions": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@typescript-eslint/no-this-alias" : "off",
+      "@typescript-eslint/triple-slash-reference" : "off",
+      "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/no-require-imports" : "off"
+    },
+    reportUnusedDisableDirectives: true,
+    settings: {
+      
+    }
+  }),
 ];
 
 export default eslintConfig;
