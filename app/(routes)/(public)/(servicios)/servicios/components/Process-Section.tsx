@@ -15,7 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-import { PROCESS_LIST } from "@/data";
+import { PROCESS_SERVICE_LIST } from "@/data";
 
 export function ProcessSection() {
   const [activeStep, setActiveStep] = useState<number | null>(null);
@@ -54,7 +54,7 @@ export function ProcessSection() {
           <div className="absolute top-20 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-primary opacity-20 hidden lg:block" />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-4">
-            {PROCESS_LIST.map((step, index) => (
+            {PROCESS_SERVICE_LIST.map((step, index) => (
               <motion.div
                 key={step.id}
                 initial={{ opacity: 0, y: 50 }}
@@ -215,7 +215,7 @@ export function ProcessSection() {
                             <h5 className="font-semibold text-foreground text-sm">
                               Incluye:
                             </h5>
-                            {step.features.map(({ id, name }) => (
+                            {step.features!.map(({ id, name }) => (
                               <motion.div
                                 key={id}
                                 className="flex items-center text-sm text-muted-foreground"

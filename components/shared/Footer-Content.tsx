@@ -57,7 +57,7 @@ export function FooterContent() {
             <li key={id}>
               <Link
                 href={`/servicios/${slug}`}
-                className="text-background/80 hover:text-primary transition-colors text-sm"
+                className="text-background/70 hover:text-white transition-colors text-sm"
               >
                 {title}
               </Link>
@@ -74,7 +74,7 @@ export function FooterContent() {
             <li key={id}>
               <Link
                 href={href}
-                className="text-background/80 hover:text-primary transition-colors text-sm"
+                className="text-background/70 hover:text-white transition-colors text-sm"
               >
                 {label}
               </Link>
@@ -89,8 +89,8 @@ export function FooterContent() {
         <div className="space-y-4">
           {SHORCUTS_ICON_FOOTER.map(({ icon: Icon, id, label }) => (
             <div key={id} className="flex items-center space-x-3">
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-background/80 text-sm">{label}</span>
+              <Icon className="h-5 w-5 text-background/50" />
+              <span className="text-background/70 text-sm">{label}</span>
             </div>
           ))}
         </div>

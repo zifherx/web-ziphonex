@@ -1,8 +1,6 @@
-"use client"
+"use client";
 
-import Link from 'next/link';
-import {motion} from 'framer-motion'
-import { ChevronRight } from 'lucide-react';
+import Link from "next/link";
 
 import {
   NavigationMenu,
@@ -11,106 +9,89 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from '../ui/navigation-menu';
-import { Button } from '../ui/button';
+} from "../ui/navigation-menu";
+import { Button } from "../ui/button";
 
-import { NEW_HEADER_MENU } from '@/data';
+import { ListItem } from "./List-Item";
+
+import { NEW_HEADER_MENU } from "@/data";
 
 export function NewDesktopMenu() {
   return (
-    <div className='hidden md:flex items-center'>
-      <NavigationMenu>
-        <NavigationMenuList className='space-x-2'>
-          <NavigationMenuItem>
-            <Link href='/' legacyBehavior passHref>
-              <NavigationMenuLink className='group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'>
-                Inicio
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
+    <NavigationMenu className="hidden md:flex items-center">
+      <NavigationMenuList className="space-x-2">
+        <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+              Inicio
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
 
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className='bg-background hover:bg-accent'>
-              Empresa
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-              <div className='grid gap-3 p-6 w-[400px]'>
-                <div className='row-span-3'>
-                  <NavigationMenuLink asChild>
-                    <Link href="/nosotros">
-                      <div className='mb-2 mt-4 text-lg font-medium text-primary'>
-                        Sobre Ziphonex
-                      </div>
-                      <p className='text-sm leading-tight text-muted-foreground'>
-                        Transformamos ideas en soluciones digitales innovadoras
-                      </p>
-                    </Link>
-                  </NavigationMenuLink>
-                </div>
-
-                <div className='grid gap-2'>
-                  {
-                    NEW_HEADER_MENU.compania.map(({id, title, description, href}) => (
-                      <NavigationMenuLink key={id} asChild>
-                          <Link href={href} className='block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group'>
-                            <div className='text-sm font-medium leading-none flex items-center'>
-                              {title}
-                              <ChevronRight className='w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity'/>
-                            </div>
-                            <p className='line-clamp-2 text-sm leading-snug text-muted-foreground'>{description}</p>
-                          </Link>
-                      </NavigationMenuLink>
-                    ))
-                  }
-                </div>
-              </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          
-          <NavigationMenuItem>
-            <NavigationMenuTrigger className='bg-background hover:bg-accent'>
-              Servicios
-            </NavigationMenuTrigger>
-            <NavigationMenuContent>
-                  <div className='grid w-[600px] gap-3 p-4 md:grid-cols-2'>
-                    {
-                      NEW_HEADER_MENU.services.map(({description,href, id, title}) => (
-                        <NavigationMenuLink key={id} asChild>
-                          <Link href={href} className='block select-none space-y-1 rounded-md p-4 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground group border border-transparent hover:border-primary/20'>
-                            <div className='text-sm font-medium leading-none flex items-center'>
-                              {title}
-                              <ChevronRight className='w-3 h-3 ml-1 opacity-0 group-hover:opacity-100 transition-opacity'/>
-                            </div>
-                            <p className='line-clamp-2 text-sm leading-snug text-muted-foreground mt-1'>
-                              {description}
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      ))
-                    }
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-background hover:bg-accent text-lg">
+            Empresa
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid gap-2 p-5 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+              <li className="row-span-3">
+                <NavigationMenuLink asChild>
+                  <div className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-primary/80 to-accent p-3 no-underline outline-none focus:shadow-md">
+                    <div className="mb-2 mt-4 text-lg font-medium text-white">
+                      Sobre Ziphonex
+                    </div>
+                    <p className="text-sm leading-tight text-gray-100">
+                      Transformamos ideas en soluciones digitales innovadoras
+                    </p>
                   </div>
-            </NavigationMenuContent>
-          </NavigationMenuItem>
-          
-          <NavigationMenuItem>
-            <Link href="/contacto" legacyBehavior passHref>
-              <NavigationMenuLink className='group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50'>
-              Contacto
-              </NavigationMenuLink>
-            </Link>
-          </NavigationMenuItem>
-        </NavigationMenuList>
-      </NavigationMenu>
+                </NavigationMenuLink>
+              </li>
+              <ListItem href="/nosotros#historia" title="Nuestra Historia">
+                Conoce nuestro recorrido
+              </ListItem>
+              <ListItem href="/nosotros#equipo" title="Equipo">
+                Los expertos detrás de Ziphonex
+              </ListItem>
+              <ListItem href="/nosotros/casos-exito" title="Casos de Éxito">
+                Proyectos que transformaron negocios
+              </ListItem>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
 
-      <motion.div
-        whileHover={{scale: 1.05}}
-        whileTap={{ scale: 0.95}}
-        className='ml-6'
-      >
-        <Button className='bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all duration-300 font-medium'>
-          Cotizar Proyecto
-        </Button>
-      </motion.div>
-    </div>
+        <NavigationMenuItem>
+          <NavigationMenuTrigger className="bg-background hover:bg-accent text-lg">
+            Servicios
+          </NavigationMenuTrigger>
+          <NavigationMenuContent>
+            <ul className="grid w-[600px] gap-3 p-4 md:grid-cols-2">
+              {NEW_HEADER_MENU.services.map(
+                ({ description, href, id, title }) => (
+                  <ListItem key={id} href={href} title={title}>
+                    {description}
+                  </ListItem>
+                )
+              )}
+              <li className="col-span-full mt-4 flex justify-center">
+                <Button
+                  asChild
+                  className="w-full bg-accent hover:bg-accent hover:scale-105"
+                >
+                  <Link href="/servicios">Ver todos los servicios</Link>
+                </Button>
+              </li>
+            </ul>
+          </NavigationMenuContent>
+        </NavigationMenuItem>
+
+        <NavigationMenuItem>
+          <Link href="/contacto" legacyBehavior passHref>
+            <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-lg font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+              Contacto
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 }

@@ -1,4 +1,5 @@
-import { CATEGORY_SERVICE, GENERAL_ICON } from '../types';
+import { ComponentPropsWithoutRef, ReactNode } from "react";
+import { CATEGORY_SERVICE, GENERAL_ICON } from "../types";
 
 export interface IGeneral {
   id: number;
@@ -72,11 +73,20 @@ export interface IProcess extends IGeneral {
   icon: GENERAL_ICON;
   title: string;
   description: string;
-  details: string;
+  details?: string;
   color: string;
   bgColor: string;
-  features: IFeature[];
-  duration: string;
+  features?: IFeature[];
+  duration?: string;
+}
+
+export interface IProcessHome extends IGeneral {
+  icon: GENERAL_ICON;
+  title: string;
+  description: string;
+  number: string;
+  color: string;
+  bgColor: string;
 }
 
 export interface ITrustIndicators extends IGeneral {
@@ -86,4 +96,51 @@ export interface ITrustIndicators extends IGeneral {
 
 export interface IFeature extends IGeneral {
   name: string;
+}
+
+export interface NumerParseResult {
+  isNumber: boolean;
+  numericValue: number;
+  symbol?: string;
+  originalValue: string | number;
+}
+
+export interface IStatGeneral {
+  id: number;
+  title: string;
+  icon: GENERAL_ICON;
+  value: number;
+  suffix: string;
+  color: string;
+}
+
+export interface INewsletterFooter extends IGeneral {
+  title: string;
+}
+
+export interface IAuthor {
+  name: string;
+  position: string;
+  avatar: string;
+  company: string;
+}
+
+export interface ITestimonial extends IGeneral {
+  author: IAuthor;
+  resena: string;
+  rating: number;
+  isActive: boolean;
+}
+
+export interface ListItemProps extends ComponentPropsWithoutRef<"li"> {
+  title: string;
+  href: string;
+  children: ReactNode;
+}
+
+export interface IFloatingIcon extends IGeneral {
+  icon: GENERAL_ICON;
+  delay: number;
+  x: string;
+  y: string;
 }

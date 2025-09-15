@@ -11,14 +11,6 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   // Configuración de archivos a ignorar
-  // {
-  //   files: ["**/*.{js.jsx,ts,tsx}"],
-  //   ignores: [
-  //     ".next/**",
-  //     "dist/**",
-  //     "node_modules/**",
-  //   ]
-  // },
   ...compat.config({
     extends: ["next/core-web-vitals", "next/typescript"],
     ignorePatterns: [

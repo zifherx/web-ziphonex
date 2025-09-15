@@ -7,6 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+
 import { ParticlesFloating } from "@/components/shared/Particles-Floating";
 
 export function HeroSection() {
