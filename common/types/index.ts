@@ -55,7 +55,7 @@ export type TITLE_SECTION_PROP = {
 
 export type CARD_FEATURE_SERVICE_PROP = {
   servicio: IService;
-  isHovered: boolean;
+  isHovered?: boolean;
 };
 
 export type PARTICLES_FLOATING_PROP = {
