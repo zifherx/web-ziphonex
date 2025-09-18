@@ -56,8 +56,8 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            Inicia una conversación que cambiará la forma en que tu negocio se
-            conecta con el mundo digital
+            Cada gran proyecto comienza con una conversación. Cuéntanos tu
+            visión y la haremos realidad.
           </motion.p>
         </motion.div>
       </div>

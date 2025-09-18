@@ -28,9 +28,12 @@ import {
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 import {
+  ICasoExito,
+  IFaqContact,
   IFloatingIcon,
   IHeaderMenu,
   IHeroSlide,
+  IList,
   INewsletterFooter,
   IProcess,
   IService,
@@ -840,4 +843,80 @@ export const FLOATING_ICON_LIST: IFloatingIcon[] = [
   { id: 2, icon: Shield, delay: 1, x: "80%", y: "30%" },
   { id: 3, icon: Sparkles, delay: 2, x: "15%", y: "70%" },
   { id: 4, icon: Clock, delay: 1.5, x: "85%", y: "80%" },
+];
+
+export const LIST_FAQ_CHOOSE_US: IList[] = [
+  { id: 1, name: "Consulta inicial gratuita" },
+  { id: 2, name: "Propuesta en 24 horas" },
+  { id: 3, name: "Equipo experto certificado" },
+  { id: 4, name: "Soporte técnico incluido" },
+  { id: 5, name: "Garantía de satisfacción" },
+];
+
+export const LIST_FAQ_CONTACT: IFaqContact[] = [
+  {
+    id: 1,
+    icon: Mail,
+    title: "Email",
+    value: "info@ziphonex.com",
+    description: "Respuesta en 24 horas",
+    gradient: "from-blue-50/60 to-blue-100/40",
+    iconBg: "bg-blue-100/50",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: 2,
+    icon: Phone,
+    title: "Teléfono",
+    value: "+51 924 063 422",
+    description: "Lun - Vie: 9AM - 6PM",
+    gradient: "from-emerald-50/60 to-emerald-100/40",
+    iconBg: "bg-emerald-100/50",
+    iconColor: "text-emerald-600",
+  },
+  {
+    id: 3,
+    icon: MapPin,
+    title: "Oficina",
+    value: "San Isidro, Trujillo",
+    description: "Cita previa",
+    gradient: "from-purple-50/60 to-purple-100/40",
+    iconBg: "bg-purple-100/50",
+    iconColor: "text-purple-600",
+  },
+];
+
+export const LIST_STATS_NOSOTROS: IStatGeneral[] = [
+  { id: 1, title: "Proyectos Exitosos", value: 50, suffix: "+", color: "" },
+  { id: 2, title: "Clientes Satisfechos", value: 98, suffix: "%", color: "" },
+  { id: 3, title: "ROI Promedio", value: 250, suffix: "%", color: "" },
+  { id: 4, title: "Soporte Técnico", value: 24, suffix: "/7", color: "" },
+];
+
+export const LIST_CASOS_EXITO: ICasoExito[] = [
+  {
+    id: 1,
+    title: "TechnoStore Perú",
+    category: "E-commerce",
+    description:
+      "Transformación digital completa de tienda de tecnología con aumento del 300% en ventas online.",
+    image: "",
+    results: [
+      { id: 1, metric: "300%", label: "Aumento en Ventas" },
+      { id: 2, metric: "150%", label: "Más Tráfico Web" },
+      { id: 3, metric: "85%", label: "Tasa de Conversión" },
+    ],
+    technologies: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Stripe" },
+      { id: 3, name: "PostgreSQL" },
+      { id: 4, name: "Vercel" },
+    ],
+    testimonial: {
+      text: "Ziphonex transformó completamente nuestro negocio. Las ventas online se triplicaron en solo 6 meses.",
+      author: "Carlos Mendoza",
+      position: "CEO, TechnoStore",
+    },
+    link_website: "#",
+  },
 ];

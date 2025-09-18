@@ -1,5 +1,6 @@
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import {
+  ICasoExito,
   IFloatingIcon,
   IHeaderMenu,
   IHeroSlide,
@@ -99,4 +100,17 @@ export type SERVICE_HERO_PROP = {
 
 export type FLOATING_ICONS_PROP = {
   iconList: IFloatingIcon[];
+};
+
+export type BUSINESS_LINE =
+  | "E-commerce"
+  | "Salud Digital"
+  | "Gastronomía"
+  | "Educación"
+  | "Saneamiento Ambiental"
+  | "Contabilidad"
+  | "Automotriz";
+
+export type CARD_CASO_EXITO_PROP = {
+  cliente: ICasoExito;
 };

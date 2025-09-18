@@ -1,3 +1,9 @@
+import { NosotrosView } from "./components/Nosotros-View";
+
 export default function NosotrosPage() {
-  return <div>NosotrosPage</div>;
+  return (
+    <div>
+      <NosotrosView />
+    </div>
+  );
 }
