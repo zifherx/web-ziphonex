@@ -15,7 +15,7 @@ export function CardStat({ stat }: CARD_STAT_PROP) {
         transition={{ duration: 0.3 }}
         className={`mx-auto mb-4 p-4 bg-gradient-to-br ${color} rounded-2xl w-fit shadow-lg group-hover:shadow-xl transition-all duration-300`}
       >
-        <Icon className="w-8 h-8 text-white" />
+        {Icon && <Icon className="w-8 h-8 text-white" />}
       </motion.div>
 
       <CountUp
