@@ -184,3 +184,16 @@ export interface ICasoExito extends IGeneral {
   testimonial: ITestimonialCase;
   link_website: string;
 }
+
+export interface IPrincipios_Nosotros extends IGeneral {
+  icon: GENERAL_ICON;
+  title: string;
+  description: string;
+}
+
+export interface ITeamMember extends IGeneral {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+}

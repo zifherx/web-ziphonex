@@ -4,9 +4,11 @@ import {
   IFloatingIcon,
   IHeaderMenu,
   IHeroSlide,
+  IPrincipios_Nosotros,
   IProcess,
   IService,
   IStatGeneral,
+  ITeamMember,
   ITestimonial,
 } from "../interfaces";
 import { LucideIcon } from "lucide-react";
@@ -108,9 +110,19 @@ export type BUSINESS_LINE =
   | "Gastronomía"
   | "Educación"
   | "Saneamiento Ambiental"
-  | "Contabilidad"
-  | "Automotriz";
+  | "Servicios Tributarios"
+  | "Sector Automotriz"
+  | "Marketing Digital"
+  | "Suplementación Deportiva";
 
 export type CARD_CASO_EXITO_PROP = {
   cliente: ICasoExito;
+};
+
+export type PRINCIPIOS_PROP = {
+  principios: IPrincipios_Nosotros[];
+};
+
+export type TEAM_MEMBER_PROP = {
+  member: ITeamMember;
 };
