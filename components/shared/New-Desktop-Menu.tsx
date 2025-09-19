@@ -52,7 +52,7 @@ export function NewDesktopMenu() {
               <ListItem href="/nosotros#equipo" title="Equipo">
                 Los expertos detrás de Ziphonex
               </ListItem>
-              <ListItem href="/nosotros/casos-exito" title="Casos de Éxito">
+              <ListItem href="/casos-exito" title="Casos de Éxito">
                 Proyectos que transformaron negocios
               </ListItem>
             </ul>

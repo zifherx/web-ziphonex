@@ -5,6 +5,7 @@ import {
   Code,
   Facebook,
   Globe,
+  Heart,
   Instagram,
   Lightbulb,
   Linkedin,
@@ -28,15 +29,20 @@ import {
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 import {
+  ICasoExito,
+  IFaqContact,
   IFloatingIcon,
   IHeaderMenu,
   IHeroSlide,
+  IList,
   INewsletterFooter,
+  IPrincipios_Nosotros,
   IProcess,
   IService,
   IShorcutsIconFooter,
   ISocialNetworkShorcut,
   IStatGeneral,
+  ITeamMember,
   ITestimonial,
   ITrustIndicators,
 } from "@/common/interfaces";
@@ -840,4 +846,383 @@ export const FLOATING_ICON_LIST: IFloatingIcon[] = [
   { id: 2, icon: Shield, delay: 1, x: "80%", y: "30%" },
   { id: 3, icon: Sparkles, delay: 2, x: "15%", y: "70%" },
   { id: 4, icon: Clock, delay: 1.5, x: "85%", y: "80%" },
+];
+
+export const LIST_FAQ_CHOOSE_US: IList[] = [
+  { id: 1, name: "Consulta inicial gratuita" },
+  { id: 2, name: "Propuesta en 24 horas" },
+  { id: 3, name: "Equipo experto certificado" },
+  { id: 4, name: "Soporte técnico incluido" },
+  { id: 5, name: "Garantía de satisfacción" },
+];
+
+export const LIST_FAQ_CONTACT: IFaqContact[] = [
+  {
+    id: 1,
+    icon: Mail,
+    title: "Email",
+    value: "info@ziphonex.com",
+    description: "Respuesta en 24 horas",
+    gradient: "from-blue-50/60 to-blue-100/40",
+    iconBg: "bg-blue-100/50",
+    iconColor: "text-blue-600",
+  },
+  {
+    id: 2,
+    icon: Phone,
+    title: "Teléfono",
+    value: "+51 924 063 422",
+    description: "Lun - Vie: 9AM - 6PM",
+    gradient: "from-emerald-50/60 to-emerald-100/40",
+    iconBg: "bg-emerald-100/50",
+    iconColor: "text-emerald-600",
+  },
+  {
+    id: 3,
+    icon: MapPin,
+    title: "Oficina",
+    value: "San Isidro, Trujillo",
+    description: "Cita previa",
+    gradient: "from-purple-50/60 to-purple-100/40",
+    iconBg: "bg-purple-100/50",
+    iconColor: "text-purple-600",
+  },
+];
+
+export const LIST_STATS_NOSOTROS: IStatGeneral[] = [
+  { id: 1, title: "Proyectos Exitosos", value: 50, suffix: "+", color: "" },
+  { id: 2, title: "Clientes Satisfechos", value: 98, suffix: "%", color: "" },
+  { id: 3, title: "ROI Promedio", value: 250, suffix: "%", color: "" },
+  { id: 4, title: "Soporte Técnico", value: 24, suffix: "/7", color: "" },
+];
+
+export const LIST_CASOS_EXITO: ICasoExito[] = [
+  {
+    id: 1,
+    title: "Marketing Al Día",
+    category: "Marketing Digital",
+    description:
+      "Plataforma integral de marketing digital con automatización de campañas y análisis de ROI.",
+    image: "website-mad.png",
+    results: [
+      { id: 1, metric: "250%", label: "ROI en Campañas" },
+      { id: 2, metric: "180%", label: "Leads Generados" },
+      { id: 3, metric: "92%", label: "Satisfacción Cliente" },
+    ],
+    technologies: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Node.js" },
+      { id: 3, name: "Redis" },
+      { id: 4, name: "Google Analytics" },
+    ],
+    testimonial: {
+      text: "Ziphonex nos ayudó a crear experiencias que realmente enamoran a nuestros clientes. Los resultados hablan por sí solos.",
+      author: "Marco Vives",
+      position: "CEO, Marketing Al Día",
+    },
+    link_website: "https://marketingaldia.net/",
+  },
+  {
+    id: 2,
+    title: "Pro Ambiente",
+    category: "Saneamiento Ambiental",
+    description:
+      "Sistema de gestión para servicios de saneamiento ambiental y control de plagas empresarial.",
+    image: "website-proambiente.png",
+    results: [
+      { id: 1, metric: "300%", label: "Clientes Atendidos" },
+      { id: 2, metric: "95%", label: "Eficiencia Operativa" },
+      { id: 3, metric: "40%", label: "Reducción Costos" },
+    ],
+    technologies: [
+      { id: 1, name: "Vue.js" },
+      { id: 2, name: "Laravel" },
+      { id: 3, name: "MySQL" },
+      { id: 4, name: "ERP Ruppiest" },
+    ],
+    testimonial: {
+      text: "La plataforma nos permitió optimizar nuestros procesos y brindar un servicio más profesional a nuestros clientes.",
+      author: "Ing. César Márquez",
+      position: "Gerente General",
+    },
+    link_website: "https://proambiente.com.pe/",
+  },
+  {
+    id: 3,
+    title: "Ok Contador Corporativo",
+    category: "Servicios Tributarios",
+    description:
+      "Plataforma de outsourcing tributario con gestión automatizada de declaraciones y reportes.",
+    image: "website-okcc.png",
+    results: [
+      { id: 1, metric: "250+", label: "Clientes Satisfechos" },
+      { id: 2, metric: "550+", label: "Empresas Constituidas" },
+      { id: 3, metric: "350+", label: "Impuestos Declarados" },
+    ],
+    technologies: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "PostgreSQL" },
+      { id: 3, name: "Supabase" },
+      { id: 4, name: "Stripe" },
+    ],
+    testimonial: {
+      text: "Nuestro equipo especializado ahora puede atender más clientes gracias a la automatización que implementó Ziphonex.",
+      author: "CPC. Mario Vasquez",
+      position: "Contador Público",
+    },
+    link_website: "https://okcc.ziphonex.com/",
+  },
+  {
+    id: 4,
+    title: "PKR Tributarios",
+    category: "Servicios Tributarios",
+    description:
+      "Sistema integral de outsourcing laboral con gestión de nóminas y recursos humanos.",
+    image: "website-pkr.png",
+    results: [
+      { id: 1, metric: "400%", label: "Procesos Automatizados" },
+      { id: 2, metric: "85%", label: "Reducción Errores" },
+      { id: 3, metric: "98%", label: "Cumplimiento Legal" },
+    ],
+    technologies: [
+      { id: 1, name: "Angular" },
+      { id: 2, name: "Spring Boot" },
+      { id: 3, name: "Oracle" },
+      { id: 4, name: "AWS" },
+    ],
+    testimonial: {
+      text: "La solución de Ziphonex nos convirtió en el mejor aliado para alcanzar el éxito empresarial de nuestros clientes.",
+      author: "Lic. Rodrigo Romero",
+      position: "Contador Público",
+    },
+    link_website: "https://pkr.com.pe/",
+  },
+  {
+    id: 5,
+    title: "Sociedad Automotores Inka",
+    category: "Sector Automotriz",
+    description:
+      "Plataforma digital integral para concesionario Multimarca con catálogo interactivo y sistema de financiamiento.",
+    image: "website-sai.png",
+    results: [
+      { id: 1, metric: "350%", label: "Ventas Cerradas" },
+      { id: 2, metric: "200%", label: "Test Drives Agendados" },
+      { id: 3, metric: "90%", label: "Satisfacción Cliente" },
+    ],
+    technologies: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Typescript" },
+      { id: 3, name: "Tailwind CSS" },
+      { id: 4, name: "Vercel" },
+    ],
+    testimonial: {
+      text: "Profesionalismo, creatividad y resultados. Ziphonex superó todas nuestras expectativas y nos ayudó a destacar en nuestro sector.",
+      author: "Carlos Peramás",
+      position: "Jefe de Marketing",
+    },
+    link_website: "https://automotoresinka.pe/",
+  },
+  {
+    id: 6,
+    title: "Maximus Nutrition",
+    category: "E-commerce",
+    description:
+      "E-commerce especializado en suplementos deportivos de alta calidad con sistema de gestión de inventario y programa de fidelización.",
+    image: "website-mn.png",
+    results: [
+      { id: 1, metric: "450%", label: "Ventas Online" },
+      { id: 2, metric: "320%", label: "Atletas Registrados" },
+      { id: 3, metric: "95%", label: "Retención de Clientes" },
+    ],
+    technologies: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Stripe" },
+      { id: 3, name: "Supabase" },
+      { id: 4, name: "Tailwind CSS" },
+    ],
+    testimonial: {
+      text: "Ziphonex nos ayudó a crear una plataforma que refleja la excelencia que buscamos. Ahora los atletas confían en nosotros para alcanzar sus metas.",
+      author: "Víctor Rodriguez",
+      position: "Fundador y CEO",
+    },
+    link_website: "https://web-maximus-nutrition.vercel.app/",
+  },
+  {
+    id: 7,
+    title: "TechnoStore Perú",
+    category: "E-commerce",
+    description:
+      "Transformación digital completa de tienda de tecnología con aumento del 300% en ventas online.",
+    image: "technology-store.png",
+    results: [
+      { id: 1, metric: "300%", label: "Aumento en Ventas" },
+      { id: 2, metric: "150%", label: "Más Tráfico Web" },
+      { id: 3, metric: "85%", label: "Tasa de Conversión" },
+    ],
+    technologies: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Stripe" },
+      { id: 3, name: "PostgreSQL" },
+      { id: 4, name: "Vercel" },
+    ],
+    testimonial: {
+      text: "Ziphonex transformó completamente nuestro negocio. Las ventas online se triplicaron en solo 6 meses.",
+      author: "Carlos Mendoza",
+      position: "CEO, TechnoStore",
+    },
+    link_website: "#",
+  },
+  {
+    id: 8,
+    title: "Clinica San Rafael",
+    category: "Salud Digital",
+    description:
+      "Sistema integral de gestión médica con portal de pacientes y telemedicina.",
+    image: "website-healthcare.png",
+    results: [
+      { id: 1, metric: "200%", label: "Más Citas Online" },
+      { id: 2, metric: "90%", label: "Satisfacción Pacientes" },
+      { id: 3, metric: "50%", label: "Reducción Tiempo Espera" },
+    ],
+    technologies: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Node.js" },
+      { id: 3, name: "MongoDB" },
+      { id: 4, name: "AWS" },
+    ],
+    testimonial: {
+      text: "La plataforma ha revolucionado nuestra atención al paciente. Ahora somos más eficientes y modernos.",
+      author: "Dra. Ana García",
+      position: "Directora Médica",
+    },
+    link_website: "#",
+  },
+  {
+    id: 9,
+    title: "RestaurantePro",
+    category: "Gastronomía",
+    description:
+      "Plataforma de delivery y reservas online con sistema de gestión integrado.",
+    image: "food-delivery.png",
+    results: [
+      { id: 1, metric: "400%", label: "Pedidos Online" },
+      { id: 2, metric: "60%", label: "Nuevos Clientes" },
+      { id: 3, metric: "95%", label: "Satisfacción Cliente" },
+    ],
+    technologies: [
+      { id: 1, name: "Vue.js" },
+      { id: 2, name: "Laravel" },
+      { id: 3, name: "MySQL" },
+      { id: 4, name: "Paypal" },
+    ],
+    testimonial: {
+      text: "Durante la pandemia, esta plataforma salvó nuestro restaurante. Ahora tenemos más pedidos que nunca.",
+      author: "Miguel Torres",
+      position: "Propietario",
+    },
+    link_website: "#",
+  },
+  {
+    id: 10,
+    title: "EduFuturo",
+    category: "Educación",
+    description:
+      "Plataforma educativa online con aulas virtuales y sistema de evaluación automatizado.",
+    image: "online-learning.png",
+    results: [
+      { id: 1, metric: "500%", label: "Estudiantes Activos" },
+      { id: 2, metric: "80%", label: "Retención Estudiantes" },
+      { id: 3, metric: "70%", label: "Mejora en Notas" },
+    ],
+    technologies: [
+      { id: 1, name: "Angular" },
+      { id: 2, name: "Django" },
+      { id: 3, name: "PostgreSQL" },
+      { id: 4, name: "WebRTC" },
+    ],
+    testimonial: {
+      text: "La plataforma nos permitió continuar educando durante la crisis y ahora somos líderes en educación digital.",
+      author: "Prof. Luis Rodriguez",
+      position: "Director Académico",
+    },
+    link_website: "#",
+  },
+];
+
+export const LIST_PRINCIPIOS: IPrincipios_Nosotros[] = [
+  {
+    id: 1,
+    icon: Code,
+    title: "Innovación",
+    description:
+      "Adoptamos las últimas tecnologías para crear soluciones disruptivas.",
+  },
+  {
+    id: 2,
+    icon: Zap,
+    title: "Velocidad",
+    description: "Entregamos resultados rápidos sin comprometer la calidad.",
+  },
+  {
+    id: 3,
+    icon: Shield,
+    title: "Seguridad",
+    description: "Garantizamos la protección total de tu información.",
+  },
+  {
+    id: 4,
+    icon: Heart,
+    title: "Pasión",
+    description: "Amamos lo que hacemos y se refleja en cada línea de código.",
+  },
+  {
+    id: 5,
+    icon: Users,
+    title: "Colaboración",
+    description: "Trabajamos como una extensión de tu equipo.",
+  },
+  {
+    id: 6,
+    icon: Globe,
+    title: "Impacto Global",
+    description: "Creamos soluciones que trascienden fronteras.",
+  },
+];
+
+export const TEAM_MEMBER: ITeamMember[] = [
+  {
+    id: 1,
+    name: "Fernando Rojas",
+    role: "CEO & Fundador",
+    description: "Arquitecto de transformación digital con visión futurista.",
+    image: "fernando-rojas.png",
+  },
+  {
+    id: 2,
+    name: "Sheyla Acevedo",
+    role: "CTO",
+    description: "Líder en arquitectura de sistemas escalables y AI.",
+    image: "sheyla-acevedo.png",
+  },
+  {
+    id: 3,
+    name: "Sergio Lavalle",
+    role: "Security Lead",
+    description: "Experto en infraestructura y seguridad cloud.",
+    image: "sergio-lavalle.png",
+  },
+  {
+    id: 4,
+    name: "Paul Holguin",
+    role: "Design Lead",
+    description: "Creador de experiencias digitales memorables.",
+    image: "",
+  },
+];
+
+export const STATS_NOSOTROS: IStatGeneral[] = [
+  { id: 1, title: "Proyectos", value: 500, suffix: "+", color: "" },
+  { id: 2, title: "Satisfacción", value: 98, suffix: "%", color: "" },
+  { id: 3, title: "Clientes", value: 70, suffix: "+", color: "" },
+  { id: 4, title: "Soporte", value: 24, suffix: "/7", color: "" },
 ];
