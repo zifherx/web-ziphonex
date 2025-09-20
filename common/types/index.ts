@@ -126,3 +126,7 @@ export type PRINCIPIOS_PROP = {
 export type TEAM_MEMBER_PROP = {
   member: ITeamMember;
 };
+
+export type RELATED_SERVICES_PROP = {
+  relatedServices: IService[];
+};

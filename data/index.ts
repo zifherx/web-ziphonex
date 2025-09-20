@@ -11,6 +11,7 @@ import {
   Linkedin,
   Mail,
   MapPin,
+  Package,
   Phone,
   Rocket,
   Search,
@@ -967,7 +968,7 @@ export const LIST_CASOS_EXITO: ICasoExito[] = [
     ],
     testimonial: {
       text: "Nuestro equipo especializado ahora puede atender más clientes gracias a la automatización que implementó Ziphonex.",
-      author: "CPC. Mario Vasquez",
+      author: "Omar Ruiz",
       position: "Contador Público",
     },
     link_website: "https://okcc.ziphonex.com/",
@@ -1225,4 +1226,45 @@ export const STATS_NOSOTROS: IStatGeneral[] = [
   { id: 2, title: "Satisfacción", value: 98, suffix: "%", color: "" },
   { id: 3, title: "Clientes", value: 70, suffix: "+", color: "" },
   { id: 4, title: "Soporte", value: 24, suffix: "/7", color: "" },
+];
+
+export const ICON_STATS_SERVICE: IStatGeneral[] = [
+  {
+    id: 1,
+    title: "Clientes Satisfechos",
+    value: 500,
+    suffix: "+",
+    icon: Users,
+    color: "text-primary",
+  },
+  {
+    id: 2,
+    title: "Tasa de Exito",
+    value: 99,
+    suffix: "%",
+    icon: Award,
+    color: "text-secondary",
+  },
+  {
+    id: 3,
+    title: "Rating Promedio",
+    value: 4.9,
+    suffix: "",
+    icon: Star,
+    color: "text-primary",
+  },
+  {
+    id: 4,
+    title: "ROI Promedio",
+    value: 300,
+    suffix: "%",
+    icon: TrendingUp,
+    color: "text-secondary",
+  },
+];
+
+export const ICON_LABEL_SERVICE: ITrustIndicators[] = [
+  { id: 1, icon: Clock, label: "" },
+  { id: 2, icon: Package, label: "" },
+  { id: 3, icon: Sparkles, label: "" },
 ];
