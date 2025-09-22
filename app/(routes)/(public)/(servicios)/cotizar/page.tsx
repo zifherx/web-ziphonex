@@ -1,9 +1,12 @@
+import { Suspense } from "react";
 import { CotizarView } from "./components/Cotizar-View";
 
 export default function CotizarPage() {
   return (
     <div>
-      <CotizarView />
+      <Suspense fallback={<>Cargando...</>}>
+        <CotizarView />
+      </Suspense>
     </div>
   );
 }
