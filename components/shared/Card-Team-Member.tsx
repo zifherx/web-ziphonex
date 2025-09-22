@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight, Linkedin, Twitter } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -30,7 +31,7 @@ export function CardTeamMember({ member }: TEAM_MEMBER_PROP) {
             src={`/images/team/${image}`}
             alt={name}
             fill
-            className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
+            className="object-contain transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
 
@@ -43,7 +44,7 @@ export function CardTeamMember({ member }: TEAM_MEMBER_PROP) {
               <Linkedin className="h-4 w-4 text-white" />
             </div>
             <div className="w-8 h-8 rounded-full bg-gray-500/60 backdrop-blur-sm flex items-center justify-center hover:bg-purple-500 hover:scale-110 transition-all duration-300">
-              <Twitter className="h-4 w-4 text-white" />
+              <FaTiktok className="h-4 w-4 text-white" />
             </div>
           </div>
 

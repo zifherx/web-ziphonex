@@ -45,6 +45,7 @@ import {
   IStatGeneral,
   ITeamMember,
   ITestimonial,
+  ITipoDocumento,
   ITrustIndicators,
 } from "@/common/interfaces";
 import { transformActiveFeatureServicesToMenuItems } from "@/common/utils/global";
@@ -1205,19 +1206,26 @@ export const TEAM_MEMBER: ITeamMember[] = [
     description: "Líder en arquitectura de sistemas escalables y AI.",
     image: "sheyla-acevedo.png",
   },
-  {
-    id: 3,
-    name: "Sergio Lavalle",
-    role: "Security Lead",
-    description: "Experto en infraestructura y seguridad cloud.",
-    image: "sergio-lavalle.png",
-  },
+  // {
+  //   id: 3,
+  //   name: "Sergio Lavalle",
+  //   role: "Security Lead",
+  //   description: "Experto en infraestructura y seguridad cloud.",
+  //   image: "sergio-lavalle.png",
+  // },
   {
     id: 4,
     name: "Paul Holguin",
     role: "Design Lead",
     description: "Creador de experiencias digitales memorables.",
-    image: "",
+    image: "paul-holguin.png",
+  },
+  {
+    id: 5,
+    name: "Saulo Otoya",
+    role: "Sales Lead",
+    description: "Estratega comercial en conversión y crecimiento exponencial.",
+    image: "saulo-otoya.png",
   },
 ];
 
@@ -1268,3 +1276,10 @@ export const ICON_LABEL_SERVICE: ITrustIndicators[] = [
   { id: 2, icon: Package, label: "" },
   { id: 3, icon: Sparkles, label: "" },
 ];
+
+export const tiposDocumento: ITipoDocumento[] = [
+  { id: 1, value: "DNI", label: "DNI", maxLength: 8 },
+  { id: 2, value: "RUC", label: "RUC", maxLength: 11 },
+  { id: 3, value: "CARNET", label: "Carnet de Extranjería", maxLength: 15 },
+  { id: 4, value: "PASAPORTE", label: "Pasaporte", maxLength: 15 },
+] as const;

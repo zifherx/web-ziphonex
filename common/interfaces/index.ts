@@ -197,3 +197,9 @@ export interface ITeamMember extends IGeneral {
   description: string;
   image: string;
 }
+
+export interface ITipoDocumento extends IGeneral {
+  value: string;
+  label: string;
+  maxLength: number;
+}

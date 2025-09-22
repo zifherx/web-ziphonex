@@ -1,14 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Clock, Package, Rocket } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { SERVICE_HERO_PROP } from "@/common/types";
 import { formatPriceForPEN } from "@/common/utils/global";
-import Link from "next/link";
+import { SERVICE_HERO_PROP } from "@/common/types";
 import { ICON_LABEL_SERVICE } from "@/data";
 
 export function HeroSection({ service }: SERVICE_HERO_PROP) {
@@ -90,7 +90,8 @@ export function HeroSection({ service }: SERVICE_HERO_PROP) {
                 size="lg"
                 asChild
               >
-                <Link href={`/cotizar/${slug}`}>
+                <Link href={`/cotizar?service=${slug}`}>
+                  {/* <Link href={`/cotizar/${slug}`}> */}
                   <Rocket className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform" />
                   Cotizar Ahora
                   <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
