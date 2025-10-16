@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
-import { CATEGORY_SERVICE, GENERAL_ICON } from "../types";
+import { BUSINESS_LINE, CATEGORY_SERVICE, GENERAL_ICON } from "../types";
 
 export interface IGeneral {
   id: number;
@@ -108,7 +108,7 @@ export interface NumerParseResult {
 export interface IStatGeneral {
   id: number;
   title: string;
-  icon: GENERAL_ICON;
+  icon?: GENERAL_ICON;
   value: number;
   suffix: string;
   color: string;
@@ -143,4 +143,63 @@ export interface IFloatingIcon extends IGeneral {
   delay: number;
   x: string;
   y: string;
+}
+
+export interface IList extends IGeneral {
+  name: string;
+}
+
+export interface IFaqContact extends IGeneral {
+  icon: GENERAL_ICON;
+  title: string;
+  value: string;
+  description: string;
+  gradient: string;
+  iconBg: string;
+  iconColor: string;
+}
+
+export interface IResult extends IGeneral {
+  metric: string;
+  label: string;
+}
+
+export interface ITechnology extends IGeneral {
+  name: string;
+}
+
+export interface ITestimonialCase {
+  text: string;
+  author: string;
+  position: string;
+}
+
+export interface ICasoExito extends IGeneral {
+  title: string;
+  category: BUSINESS_LINE;
+  description: string;
+  image: string;
+  results: IResult[];
+  technologies: ITechnology[];
+  testimonial: ITestimonialCase;
+  link_website: string;
+}
+
+export interface IPrincipios_Nosotros extends IGeneral {
+  icon: GENERAL_ICON;
+  title: string;
+  description: string;
+}
+
+export interface ITeamMember extends IGeneral {
+  name: string;
+  role: string;
+  description: string;
+  image: string;
+}
+
+export interface ITipoDocumento extends IGeneral {
+  value: string;
+  label: string;
+  maxLength: number;
 }
