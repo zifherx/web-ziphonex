@@ -1,0 +1,22 @@
+{
+  "git" : {
+    "deploymentEnabled" : {
+      "main" : true,
+      "release" : true,
+      "develop" : true
+    }
+  },
+  "github": {
+    "enabled": true,
+    "autoAlias" : true,
+    "silent": false,
+    "autoJobCancelation": true
+  },
+  "buildCommand": "pnpm run build",
+  "devCommand": "pnpm run dev",
+  "installCommand": "pnpm install",
+  "framework": "nextjs",
+  "regions" : ["iad1"],
+  "cleanUrls": true,
+  "trailingSlash": false
+}

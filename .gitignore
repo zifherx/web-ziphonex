@@ -21,6 +21,8 @@
 /build
 /dist
 dist
+gh-rulesets
+/gh-rulesets
 
 # misc
 .DS_Store
@@ -41,3 +43,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
