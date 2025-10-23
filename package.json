@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint . --fix",
-    "lint:cmd": "npx eslint . && echo ✅ ESLint: No errors found!"
+    "lint:cmd": "npm run lint . && echo ✅ ESLint: No errors found!"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
