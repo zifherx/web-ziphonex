@@ -18,6 +18,7 @@ import { FiltrosSection } from "./Filtros-Section";
 import { ContentSection } from "./Content-Section";
 import { SocialMediaDialog } from "./SocialMedia-Dialog";
 import { SocialMediaDeleteDialog } from "./SocialMedia-Delete-Dialog";
+import { toast } from "sonner";
 
 export function SocialMediaView() {
   const [view, setView] = useState<"table" | "card">("table");
@@ -32,7 +33,7 @@ export function SocialMediaView() {
 
   const [items, setItems] = useState<SocialMediaResponseDto[]>([]);
 
-  const { data, isLoading } = useSocialMediaList(true);
+  const { data, isLoading, refetch } = useSocialMediaList(true);
 
   const createMutation = useCreateSocialMedia();
   const updateMutation = useUpdateSocialMedia();
@@ -55,6 +56,29 @@ export function SocialMediaView() {
   //   );
   // }
 
+  const handleNew = () => {
+    console.log(`SocialMedia | handleNew | ejecutando`);
+    setSelectedSocialMedia(null);
+    setEditDialogOpen(true);
+  };
+
+  const handleEdit = (socialMedia: SocialMediaResponseDto) => {
+    console.log(`SocialMedia | handleEdit | ejecutando: ${socialMedia.id}`);
+    setSelectedSocialMedia(socialMedia);
+    setEditDialogOpen(true);
+  };
+
+  const handleDelete = (socialMedia: SocialMediaResponseDto) => {
+    console.log(`SocialMedia | handleDelete | ejecutando: ${socialMedia.id}`);
+    setSelectedSocialMedia(socialMedia);
+    setDeleteDialogOpen(true);
+  };
+
+  const handleRefresh = () => {
+    refetch();
+    toast.success("¡ Contenido actualizado!");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 rounded-lg p-6 space-y-5">
       <div className="flex items-center justify-between mb-4">
@@ -70,11 +94,17 @@ export function SocialMediaView() {
           <Button
             variant="ghost"
             className="bg-secondary text-white cursor-pointer hover:scale-110"
+            onClick={handleNew}
           >
             <Plus className="h-6 w-6" strokeWidth={2} />
           </Button>
 
-          <Button variant="outline" className="cursor-pointer hover:scale-110">
+          <Button
+            variant="outline"
+            className="cursor-pointer hover:scale-110"
+            onClick={handleRefresh}
+            disabled={isLoading}
+          >
             <RefreshCcw size={20} strokeWidth={2} />
           </Button>
         </div>
@@ -97,8 +127,8 @@ export function SocialMediaView() {
         statusFilter={statusFilter}
         items={items}
         view={view}
-        onEdit={() => console.log("Editando")}
-        onDelete={() => console.log("Eliminando")}
+        onEdit={handleEdit}
+        onDelete={handleDelete}
       />
 
       <SocialMediaDialog

@@ -1,19 +1,18 @@
+import Link from "next/link";
 import { ColumnDef } from "@tanstack/react-table";
-import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
-import { Checkbox } from "@/components/ui/checkbox";
 import {
   ArrowUpDown,
   Edit,
   ExternalLink,
   HelpCircle,
-  Star,
   Trash2,
 } from "lucide-react";
-import { UpdateSocialMediaDto } from "../dto/social-media/update-social-media.dto";
+
+import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import Link from "next/link";
-import { GENERAL_ICON } from "../types";
+
+import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
 import { getIconComponent } from "../utils/GlobalFunctions";
 
 export const SocialMediaColumn: ColumnDef<SocialMediaResponseDto>[] = [

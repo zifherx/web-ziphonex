@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
-import { CreateSocialMediaInput } from "../validations/social-media.validation";
+import { UpdateSocialMediaInput } from "../validations/social-media.validation";
 
 export type SORTABLE_TABLE_ROW_PROP = {
   item: SocialMediaResponseDto;
@@ -13,7 +13,14 @@ export type SOCIALMEDIA_DIALOG_PROP = {
   open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
   editItem: SocialMediaResponseDto | null;
-  onSubmit: (data: CreateSocialMediaInput) => void;
+  onSubmit: (data: UpdateSocialMediaInput) => void;
+  isSubmitting?: boolean;
+};
+
+export type SOCIALMEDIA_FORM_PROP = {
+  onOpenChange: Dispatch<SetStateAction<boolean>>;
+  editItem: SocialMediaResponseDto | null;
+  onSubmit: (data: UpdateSocialMediaInput) => void;
   isSubmitting?: boolean;
 };
 
@@ -23,13 +30,6 @@ export type SOCIALMEDIA_DELETE_DIALOG_PROPS = {
   item: SocialMediaResponseDto | null;
   onConfirm: () => void;
   isDeleting?: boolean;
-};
-
-export type SOCIALMEDIA_FORM_PROPS = {
-  editItem: SocialMediaResponseDto | null;
-  onOpenChange: Dispatch<SetStateAction<boolean>>;
-  onSubmit: (data: CreateSocialMediaInput) => void;
-  isSubmitting?: boolean;
 };
 
 export type SOCIALMEDIA_INDICATORS_PROPS = {

@@ -62,7 +62,10 @@ export function ContentTableView({
       grouping,
       globalFilter: iconNameFilter,
     },
-    meta: {},
+    meta: {
+      onEdit,
+      onDelete,
+    },
     globalFilterFn: (row, columnId, filterValue) => {
       const label = row.original.label.toLowerCase();
       const searchValue = filterValue.toLowerCase();
