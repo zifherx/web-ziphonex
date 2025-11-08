@@ -1,6 +1,13 @@
+import { Metadata } from "next";
+import { SignInView } from "./components/Sign-In-View";
 
-export default function SignInPage() {
-  return (
-    <div>SignInPage</div>
-  )
+export const metadata: Metadata = {
+  title: {
+    default: "Login",
+    template: "",
+  },
+};
+
+export default function SignIPage() {
+  return <SignInView />;
 }

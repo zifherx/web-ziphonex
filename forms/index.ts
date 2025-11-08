@@ -25,11 +25,9 @@ export const formularioCotizarSchema = z
       .length(9, "El teléfono debe tener 9 dígitos")
       .regex(/^\d+$/, "El celular solo debe contener números"),
     message: z.string().optional(),
-    aceptaPolitica: z
-      .boolean()
-      .refine((val) => val === true, {
-        error: "Debe aceptar la política de tratamiento de datos",
-      }),
+    aceptaPolitica: z.boolean().refine((val) => val === true, {
+      error: "Debe aceptar la política de tratamiento de datos",
+    }),
     aceptaBoletin: z.boolean().optional(),
   })
   .refine(

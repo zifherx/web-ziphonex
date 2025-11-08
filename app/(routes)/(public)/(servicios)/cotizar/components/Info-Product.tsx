@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 
 import { SERVICE_INFO_PROP } from "@/common/types";
-import { formatPriceForPEN } from "@/common/utils/global";
+import { formatPriceForPEN } from "@/common/utils/GlobalFunctions";
 
 export function InfoProduct({ service }: SERVICE_INFO_PROP) {
   const {

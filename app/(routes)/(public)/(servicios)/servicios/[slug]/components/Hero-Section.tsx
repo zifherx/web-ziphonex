@@ -7,7 +7,7 @@ import { ArrowRight, Clock, Package, Rocket } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-import { formatPriceForPEN } from "@/common/utils/global";
+import { formatPriceForPEN } from "@/common/utils/GlobalFunctions";
 import { SERVICE_HERO_PROP } from "@/common/types";
 import { ICON_LABEL_SERVICE } from "@/data";
 

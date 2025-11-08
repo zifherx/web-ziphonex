@@ -48,7 +48,7 @@ import {
   ITipoDocumento,
   ITrustIndicators,
 } from "@/common/interfaces";
-import { transformActiveFeatureServicesToMenuItems } from "@/common/utils/global";
+import { transformActiveFeatureServicesToMenuItems } from "@/common/utils/GlobalFunctions";
 
 export const HEADER_MENU: IHeaderMenu[] = [
   { id: 1, href: "/", label: "Inicio" },
