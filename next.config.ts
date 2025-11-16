@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   /* config options here */
   allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
   images: {
-    unoptimized: true,
+    unoptimized: false,
     remotePatterns: [
       {
         hostname: "**",
@@ -12,9 +12,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  distDir: "dist",
-  output: "standalone",
-  assetPrefix: "",
 };
 
 export default nextConfig;

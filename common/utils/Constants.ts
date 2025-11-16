@@ -54,3 +54,10 @@ export const ICON_MAP: Record<string, IIconMapItem> = {
   telegram: { icon: FaTelegram, color: "#0088CC", name: "Telegram" },
   discord: { icon: FaDiscord, color: "#5865F2", name: "Discord" },
 };
+
+export const NUMBERS = {
+  FIFTY: 50,
+  ONE_HUNDRED: 100,
+  TWO_HUNDRED: 200,
+  FIVE_THOUSAND: 5000,
+};

@@ -57,7 +57,9 @@ export function FormLogin() {
 
     if (result.status === "error") {
       setIsSubmitting(false);
-      toast.error(`Error en el login`);
+      toast.error(`Error en el login`, {
+        description: "Revisa las credenciales",
+      });
     }
 
     if (result.status === "ok") {
@@ -168,11 +170,11 @@ export function FormLogin() {
             type="submit"
             form="form-login"
             disabled={isSubmitting}
-            className="w-full cursor-pointer bg-gradient-to-r from-primary to-secondary text-white py-6 text-xl font-bold rounded-2xl group hover:scale-105"
+            className="w-full cursor-pointer bg-linear-to-r from-primary to-secondary text-white py-6 text-xl font-bold rounded-2xl group hover:scale-105"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="mr-3 w-6 h-6" />
+                <Loader2 className="mr-3 w-6 h-6 animate-spin" />
                 Iniciando...
               </>
             ) : (

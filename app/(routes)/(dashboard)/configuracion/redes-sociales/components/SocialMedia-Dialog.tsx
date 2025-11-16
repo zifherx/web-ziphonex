@@ -17,7 +17,7 @@ export function SocialMediaDialog({
   onOpenChange,
   onSubmit,
   open,
-  isSubmitting,
+  isSubmitting = false,
 }: SOCIALMEDIA_DIALOG_PROP) {
   const isEditing = !!editItem?.id;
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stackServerApp } from "./stack/server";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const usuarioConectado = await stackServerApp.getUser();
   if (!usuarioConectado) {
     return NextResponse.redirect(new URL("/auth/signin", request.url));

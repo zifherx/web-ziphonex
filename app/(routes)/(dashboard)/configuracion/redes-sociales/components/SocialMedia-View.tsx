@@ -136,7 +136,7 @@ export function SocialMediaView() {
         onOpenChange={setEditDialogOpen}
         editItem={selectedSocialMedia}
         onSubmit={() => console.log("Submit Dialog")}
-        isSubmitting={true}
+        isSubmitting={createMutation.isPending || updateMutation.isPending}
       />
 
       <SocialMediaDeleteDialog

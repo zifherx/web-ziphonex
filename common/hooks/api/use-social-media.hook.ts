@@ -146,6 +146,7 @@ export function useCreateSocialMedia() {
           icon: newData.icon,
           href: newData.href,
           order: previousList.length,
+          status: newData.status ?? "default",
           isActive: newData.isActive ?? true,
           openInNewTab: newData.openInNewTab ?? true,
           color: newData.color,

@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
 import { UpdateSocialMediaInput } from "../validations/social-media.validation";
+import { UseFormReturn } from "react-hook-form";
 
 export type SORTABLE_TABLE_ROW_PROP = {
   item: SocialMediaResponseDto;
@@ -22,6 +23,7 @@ export type SOCIALMEDIA_FORM_PROP = {
   editItem: SocialMediaResponseDto | null;
   onSubmit: (data: UpdateSocialMediaInput) => void;
   isSubmitting?: boolean;
+  form?: UseFormReturn<UpdateSocialMediaInput>;
 };
 
 export type SOCIALMEDIA_DELETE_DIALOG_PROPS = {

@@ -19,6 +19,13 @@ import { Sidebar_Menu } from "@/data/dashboard/menu.data";
 
 export function SidebarApp({ ...props }: ComponentProps<typeof Sidebar>) {
   const userLogged = useUser();
+  // const mockUserLogged = {
+  //   avatar: "",
+  //   email: "frojasq@ziphonex.com",
+  //   name: "Fernando Rojas",
+  //   isActive: true,
+  //   cerrarSesion: async () => await console.log("Cerrar sesión"),
+  // };
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -38,6 +45,13 @@ export function SidebarApp({ ...props }: ComponentProps<typeof Sidebar>) {
               isActive: true,
               cerrarSesion: userLogged.signOut,
             }}
+            // usuarioConectado={{
+            //   avatar: userLogged.avatar,
+            //   email: userLogged.email,
+            //   name: userLogged.name,
+            //   isActive: userLogged.isActive,
+            //   cerrarSesion: userLogged.cerrarSesion,
+            // }}
           />
         )}
       </SidebarFooter>
