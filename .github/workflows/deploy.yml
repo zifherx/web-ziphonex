@@ -63,6 +63,7 @@ jobs:
           NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
           STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
           NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
 
       - name: Upload build artifacts
         if: success()
@@ -103,6 +104,7 @@ jobs:
           NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
           STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
           NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
 
       - name: Comment deployment URL
         if: github.event_name == 'pull_request'
@@ -148,6 +150,7 @@ jobs:
           NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
           STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
           NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
 
       - name: Comment deployment URL
         if: github.event_name == 'pull_request'
@@ -193,6 +196,7 @@ jobs:
           NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
           STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
           NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
 
       - name: 📢 Notify production deployment
         if: success()
@@ -234,6 +238,7 @@ jobs:
           NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
           STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
           NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI}}
 
       - name: Comment PR with preview URL
         uses: actions/github-script@v7
