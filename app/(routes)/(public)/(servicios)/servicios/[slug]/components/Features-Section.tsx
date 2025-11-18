@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 
 import { SERVICE_HERO_PROP } from "@/common/types";
-import { formatPriceForPEN } from "@/common/utils/global";
+import { formatPriceForPEN } from "@/common/utils/GlobalFunctions";
 import Link from "next/link";
 
 export function FeaturesSection({ service }: SERVICE_HERO_PROP) {

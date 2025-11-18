@@ -203,3 +203,9 @@ export interface ITipoDocumento extends IGeneral {
   label: string;
   maxLength: number;
 }
+
+export interface IIconMapItem {
+  icon: GENERAL_ICON;
+  color: string;
+  name: string;
+}

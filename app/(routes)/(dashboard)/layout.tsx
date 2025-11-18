@@ -3,27 +3,29 @@ import { Metadata } from "next";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { NavigationApp } from "./components/Navigation-App";
 import { SidebarApp } from "./components/Sidebar-App";
+import DashboardProviders from "./providers";
 
-import { REACT_CHILDREN_PROP } from "@/types/common.types";
+import { GENERAL_TYPE } from "@/common/types";
 
 export const metadata: Metadata = {
   title: {
-    default: 'CMS Dashboard',
-    template: ''
-  }
-}
+    default: "CMS",
+    template: "",
+  },
+};
 
-export default function LayoutDashboard({children}: REACT_CHILDREN_PROP) {
+export default function LayoutDashboard({ children }: GENERAL_TYPE) {
   return (
-    <SidebarProvider>
-      <SidebarApp/>
-      <SidebarInset>
-        <main className="flex flex-col gap-4 p-4 pt-5">
-          <NavigationApp/>
-          {children}
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
-  )
+    <DashboardProviders>
+      <SidebarProvider>
+        <SidebarApp />
+        <SidebarInset>
+          <main className="flex flex-col gap-4 p-4 pt-5">
+            <NavigationApp />
+            {children}
+          </main>
+        </SidebarInset>
+      </SidebarProvider>
+    </DashboardProviders>
+  );
 }
-

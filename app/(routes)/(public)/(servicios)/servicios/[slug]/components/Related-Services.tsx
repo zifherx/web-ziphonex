@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card";
 import { TitleSection } from "@/components/shared/Title-Section";
 
-import { formatPriceForPEN } from "@/common/utils/global";
+import { formatPriceForPEN } from "@/common/utils/GlobalFunctions";
 import { RELATED_SERVICES_PROP } from "@/common/types";
 
 export function RelatedServices({ relatedServices }: RELATED_SERVICES_PROP) {

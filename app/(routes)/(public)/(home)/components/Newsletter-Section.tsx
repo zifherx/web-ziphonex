@@ -10,7 +10,7 @@ import { NEWSLETTER_FOOTER } from "@/data";
 
 export function NewsletterSection() {
   return (
-    <section className="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
+    <section className="py-20 bg-linear-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
           animate={{ rotate: 360, scale: [1, 1.2, 1] }}

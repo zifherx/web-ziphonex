@@ -39,6 +39,11 @@ export type CATEGORY_SERVICE =
   | "CONSULTORIA"
   | "E-COMMERCE";
 
+export type ANIMATED_DOT_PROP = {
+  isActive: boolean;
+  progress: number;
+};
+
 export type CARD_HERO_PROP = {
   contentCard: IHeroSlide;
 };

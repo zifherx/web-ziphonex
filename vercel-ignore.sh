@@ -1,42 +1,71 @@
 #!/bin/bash
 
 # Script para controlar cuándo Vercel debe hacer deploy
-# Coloca este archivo en la raíz de tu proyecto
+# Este script retorna:
+# - exit 1: Proceder con el build
+# - exit 0: Cancelar el build
 
-echo "VERCEL_GIT_COMMIT_REF: $VERCEL_GIT_COMMIT_REF"
-echo "VERCEL_GIT_COMMIT_MESSAGE: $VERCEL_GIT_COMMIT_MESSAGE"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🔍 Vercel Build Decision Script"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "Branch: $VERCEL_GIT_COMMIT_REF"
+echo "Commit: $VERCEL_GIT_COMMIT_MESSAGE"
+echo "Environment: $VERCEL_ENV"
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
-# Deploy en main solo si viene de un PR de release
+# Skip builds para commits específicos
+if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ \[skip\ ci\] ]] || \
+   [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ \[skip\ vercel\] ]]; then
+  echo "🚫 [skip ci] detected - Canceling build"
+  exit 0
+fi
+
+# Skip builds solo de documentación
+if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ ^docs:.*only ]] || \
+   [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ ^docs\(.*\):.*only ]]; then
+  echo "📝 Documentation only - Canceling build"
+  exit 0
+fi
+
+# Rama MAIN (Production)
 if [[ "$VERCEL_GIT_COMMIT_REF" == "main" ]]; then
-  # Verifica si el último commit menciona un merge de release
-  if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "Merge pull request".+"release" ]] || \
+  # Solo deploy si viene de un merge desde release
+  if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "Merge pull request" ]] && \
      [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "release" ]]; then
-    echo "✅ Deploying to Production (main)"
-    exit 1  # Proceder con el build
-  else
-    echo "🚫 Skipping deployment - Not from release branch"
-    exit 0  # Cancelar build
-  fi
-fi
-
-# Deploy en release solo si viene de un PR de develop
-if [[ "$VERCEL_GIT_COMMIT_REF" == "release" ]]; then
-  if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "Merge pull request".+"develop" ]] || \
-     [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "develop" ]]; then
-    echo "✅ Deploying to Test (release)"
+    echo "✅ Production deployment from release branch"
     exit 1
-  else
-    echo "🚫 Skipping deployment - Not from develop branch"
-    exit 0
   fi
+  
+  # Permitir hotfix directos en main (emergencias)
+  if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ ^hotfix ]]; then
+    echo "🚨 Hotfix detected - Deploying to production"
+    exit 1
+  fi
+  
+  echo "🚫 Blocking direct push to main (must come from release)"
+  exit 0
 fi
 
-# Deploy en develop siempre que haya un push o PR
-if [[ "$VERCEL_GIT_COMMIT_REF" == "develop" ]]; then
-  echo "✅ Deploying to Development (develop)"
+# Rama RELEASE (Test/Staging - Preview Deployment)
+if [[ "$VERCEL_GIT_COMMIT_REF" == "release" ]]; then
+  # Permitir deployments desde develop o directos
+  if [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "Merge pull request" ]] && \
+     [[ "$VERCEL_GIT_COMMIT_MESSAGE" =~ "develop" ]]; then
+    echo "✅ Test deployment from develop branch"
+    exit 1
+  fi
+  
+  # Permitir commits directos en release (para ajustes pre-producción)
+  echo "✅ Test deployment (release branch)"
   exit 1
 fi
 
-# Para cualquier otra rama o preview, permitir deploy
-echo "✅ Deploying preview"
+# Rama DEVELOP (Development Environment)
+if [[ "$VERCEL_GIT_COMMIT_REF" == "develop" ]]; then
+  echo "✅ Development deployment (develop branch)"
+  exit 1
+fi
+
+# Feature branches y otros (Preview Deployments)
+echo "✅ Preview deployment for feature branch"
 exit 1
