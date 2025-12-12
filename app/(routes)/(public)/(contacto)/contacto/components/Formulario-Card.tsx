@@ -4,6 +4,15 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Loader,
+  Mail,
+  MessageSquare,
+  Send,
+  Settings,
+  Smartphone,
+  User,
+} from "lucide-react";
 
 import {
   Card,
@@ -20,20 +29,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
-import { formularioSchema, FormularioType } from "@/forms";
-import {
-  Loader,
-  Mail,
-  MessageSquare,
-  Send,
-  Settings,
-  Smartphone,
-  Tag,
-  User,
-} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -41,15 +39,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import { formularioContactoSchema, FormularioContactoType } from "@/forms";
 import { SERVICES_LIST } from "@/data";
-import { Button } from "@/components/ui/button";
 
 export function FormularioCard() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [focusedField, setFocusedField] = useState<string | null>(null);
 
-  const formulario = useForm<FormularioType>({
-    resolver: zodResolver(formularioSchema),
+  const formulario = useForm<FormularioContactoType>({
+    resolver: zodResolver(formularioContactoSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -59,7 +58,7 @@ export function FormularioCard() {
     },
   });
 
-  const handleOnSubmit = async (values: any) => {
+  const handleOnSubmit = async (values: FormularioContactoType) => {
     setIsSubmitting(true);
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));

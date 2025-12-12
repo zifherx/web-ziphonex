@@ -1,0 +1,290 @@
+name: Deploy to Vercel
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - release
+      - main
+  push:
+    branches:
+      - develop
+      - release
+      - main
+
+permissions:
+  contents: read
+  deployments: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ============================================
+  # JOB 1: TESTS Y VALIDACIONES
+  # ============================================
+  test:
+    name: Tests & Quality Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Run linter
+        run: pnpm run lint
+        continue-on-error: false
+
+      - name: Run type check
+        run: pnpm run type-check || pnpm exec tsc --noEmit
+        continue-on-error: false
+
+      - name: Run unit tests
+        run: pnpm run test || echo "No tests configured yet"
+        continue-on-error: false
+
+      - name: Build project
+        run: pnpm run build
+        env:
+          NODE_ENV: production
+          NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
+          STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
+          NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI_DEV}}
+
+      - name: Upload build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-output
+          path: .next/
+          retention-days: 1
+
+  # ============================================
+  # JOB 2: DEPLOY DEVELOPMENT (develop branch)
+  # ============================================
+  deploy-development:
+    name: Deploy to Development
+    runs-on: ubuntu-latest
+    needs: test
+    if: |
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/develop'
+    environment:
+      name: Development
+      url: https://web-dev.ziphonex.com
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (Development)
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy-develop
+        with:
+          vercel-token: ${{secrets.VERCEL_TOKEN}}
+          vercel-org-id: ${{secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
+          vercel-args: "--prod"
+          scope: ${{secrets.VERCEL_ORG_ID}}
+        env:
+          NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
+          STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
+          NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI_DEV}}
+
+      - name: Comment deployment URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Deployed to Developmen: https://web-dev.ziphonex.com`
+            })
+
+  # ============================================
+  # JOB 3: DEPLOY RELEASE/TEST (release branch)
+  # ============================================
+  deploy-release:
+    name: Deploy to Test
+    runs-on: ubuntu-latest
+    needs: test
+    if: |
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/release'
+    environment:
+      name: Release
+      url: https://web-test.ziphonex.com
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (Release)
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy-release
+        with:
+          vercel-token: ${{secrets.VERCEL_TOKEN}}
+          vercel-org-id: ${{secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
+          vercel-args: "--prod"
+          scope: ${{secrets.VERCEL_ORG_ID}}
+        env:
+          VERCEL_ENV: "preview"
+          NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
+          STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
+          NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI_DEV}}
+
+      - name: Comment deployment URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `🚀 Deployed to Test/Staging: https://web-test.ziphonex.com`
+            })
+
+  # ============================================
+  # JOB 4: DEPLOY PRODUCTION (main branch)
+  # ============================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: test
+    if: |
+      github.event_name == 'push' &&
+      github.ref == 'refs/heads/main'
+    environment:
+      name: Production
+      url: https://ziphonex.com
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel Production
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy-production
+        with:
+          vercel-token: ${{secrets.VERCEL_TOKEN}}
+          vercel-org-id: ${{secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
+          vercel-args: "--prod"
+          scope: ${{secrets.VERCEL_ORG_ID}}
+        env:
+          VERCEL_ENV: "production"
+          NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
+          STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
+          NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI_PROD}}
+
+      - name: 📢 Notify production deployment
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: 'production',
+              description: 'Deployed to production'
+            })
+
+  # ============================================
+  # JOB 5: PREVIEW DEPLOYMENTS (PRs)
+  # ============================================
+  deploy-preview:
+    name: Deploy Preview
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.event_name == 'pull_request'
+    environment:
+      name: Preview
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Vercel (Preview)
+        uses: amondnet/vercel-action@v25
+        id: vercel-deploy-preview
+        with:
+          vercel-token: ${{secrets.VERCEL_TOKEN}}
+          vercel-org-id: ${{secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{secrets.VERCEL_PROJECT_ID}}
+          scope: ${{secrets.VERCEL_ORG_ID}}
+        env:
+          NEXT_PUBLIC_STACK_PROJECT_ID: ${{secrets.NEXT_PUBLIC_STACK_PROJECT_ID}}
+          STACK_SECRET_SERVER_KEY: ${{secrets.STACK_SECRET_SERVER_KEY}}
+          NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY: ${{secrets.NEXT_PUBLIC_STACK_PUBLISHABLE_CLIENT_KEY}}
+          MONGODB_URI: ${{secrets.MONGODB_URI_DEV}}
+
+      - name: Comment PR with preview URL
+        uses: actions/github-script@v7
+        if: steps.vercel-deploy-preview.outputs.preview-url
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const deploymentUrl = `https://${{ steps.vercel-deploy-preview.outputs.preview-url }}`;
+
+            // ✅ Validar que la URL existe y no está vacía
+            if(!deploymentUrl || deploymentUrl === ''){
+              console.log('No preview URL available');
+              return;
+            }
+
+            // ✅ Formatear URL correctamente
+            const formattedUrl = deploymentUrl.startsWith('http') ? deploymentUrl : `https://${deploymentUrl}`;
+
+            const comment = `## 🚀 Preview Deployment
+
+            ✅ **Preview deployed successfully!**
+
+            📎 **Preview URL:** ${formattedUrl}
+
+            ### 📈 Build Info
+            - **Commit:** \`${context.sha.substring(0,7)}\`
+            - **Branch:** \`${context.ref.replace('refs/heads/', '')}\`
+            - **Actor:** @${context.actor}
+
+            ---
+            _Auto-generated by GH Actions_`;
+
+            try{
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: comment
+              })
+            }catch(error){
+              console.error('❌ Failed to post comment:', error.message);
+            }

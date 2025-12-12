@@ -1,0 +1,29 @@
+# Propietarios para Code Review
+
+# Default
+
+- @zifherx
+
+# Protección a archivos críticos
+
+/package.json @zifherx
+/pnpm-lock.yaml @zifherx
+/vercel.json @zifherx
+/.github/ @zifherx
+/next.config.\* @zifherx
+
+# App Router y componentes
+
+/app @zifherx
+/components @zifherx
+/lib @zifherx
+
+# APIs y servicios
+
+/app/api @zifherx
+
+# Configuraciones de deployment
+
+/Dockerfile @zifherx
+/.env.\* @zifherx
+/public/ @zifherx

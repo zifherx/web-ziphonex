@@ -15,7 +15,7 @@ import {
 import { Button } from "../ui/button";
 
 import { CARD_FEATURE_SERVICE_PROP } from "@/common/types";
-import { formatPriceForPEN } from "@/common/utils/global";
+import { formatPriceForPEN } from "@/common/utils/GlobalFunctions";
 
 export function CardService({
   servicio,

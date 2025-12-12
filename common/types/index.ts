@@ -39,6 +39,11 @@ export type CATEGORY_SERVICE =
   | "CONSULTORIA"
   | "E-COMMERCE";
 
+export type ANIMATED_DOT_PROP = {
+  isActive: boolean;
+  progress: number;
+};
+
 export type CARD_HERO_PROP = {
   contentCard: IHeroSlide;
 };
@@ -125,4 +130,20 @@ export type PRINCIPIOS_PROP = {
 
 export type TEAM_MEMBER_PROP = {
   member: ITeamMember;
+};
+
+export type RELATED_SERVICES_PROP = {
+  relatedServices: IService[];
+};
+
+export type BREADCRUMB_COTIZAR_PROP = SERVICE_BREADCRUMB_PROP & {
+  slugPage: string;
+};
+
+export type SERVICE_GRID_PROP = {
+  service: IService;
+};
+
+export type SERVICE_INFO_PROP = {
+  service: IService;
 };
