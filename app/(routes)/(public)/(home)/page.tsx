@@ -1,3 +1,4 @@
+import { NewHeroSection } from "./components/New-Hero-Section";
 import { HeroSection } from "./components/Hero-Section";
 import { StatsSection } from "./components/Stats-Section";
 import { ServiceSection } from "./components/Service-Section";
@@ -8,7 +9,8 @@ import { NewsletterSection } from "./components/Newsletter-Section";
 export default function HomePage() {
   return (
     <div>
-      <HeroSection />
+      <NewHeroSection />
+      {/* <HeroSection /> */}
       <StatsSection />
       <ServiceSection />
       <ProcessSection />

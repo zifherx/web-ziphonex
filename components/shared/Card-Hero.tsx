@@ -18,14 +18,14 @@ export function CardHero({ contentCard }: CARD_HERO_PROP) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -30 }}
       transition={{ duration: 0.8 }}
-      className="space-y-8"
+      className="space-y-8 w-full"
     >
       {/* Badge */}
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
-        className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-100 to-purple-100 text-primary px-6 py-3 rounded-full text-sm font-medium shadow-lg backdrop-blur-sm border border-blue-200/50"
+        className="inline-flex items-center space-x-2 bg-linear-to-r from-blue-100 to-purple-100 text-primary px-6 py-3 rounded-full text-sm font-medium shadow-lg backdrop-blur-sm border border-blue-200/50"
       >
         <Icon className="h-5 w-5" />
         <span>{text}</span>
@@ -39,7 +39,7 @@ export function CardHero({ contentCard }: CARD_HERO_PROP) {
         className="font-playfair font-bold text-4xl md:text-6xl lg:text-7xl text-foreground leading-tight text-balance"
       >
         {title}
-        <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
+        <span className="bg-linear-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent block">
           {highlight}
         </span>
       </motion.h1>
