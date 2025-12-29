@@ -13,7 +13,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 
-import { SOCIALMEDIA_DELETE_DIALOG_PROPS } from "@/common/types/socialmedia-props";
+import { SOCIALMEDIA_DELETE_DIALOG_PROPS } from "@/common/types/socialmedia.props";
 
 export function SocialMediaDeleteDialog({
   item,
@@ -28,8 +28,7 @@ export function SocialMediaDeleteDialog({
         <AlertDialogHeader>
           <AlertDialogTitle>¿Estás absolutamente seguro?</AlertDialogTitle>
           <AlertDialogDescription>
-            Está acción no se puede deshacer. Esto eliminará permanentemente la
-            red social{" "}
+            Está acción no se puede deshacer. Esto eliminará permanentemente la red social{" "}
             <span className="font-semibold text-gray-900">{item?.label}</span>.
           </AlertDialogDescription>
         </AlertDialogHeader>

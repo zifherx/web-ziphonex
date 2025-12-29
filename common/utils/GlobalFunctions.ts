@@ -14,9 +14,7 @@ export const transformServicesToMenuItems = (servicios: IService[]) => {
   }));
 };
 
-export const transformActiveFeatureServicesToMenuItems = (
-  servicios: IService[]
-) => {
+export const transformActiveFeatureServicesToMenuItems = (servicios: IService[]) => {
   return servicios
     .filter((servicio) => servicio.isActive && servicio.isFeature)
     .map((servicio) => ({
@@ -27,10 +25,7 @@ export const transformActiveFeatureServicesToMenuItems = (
     }));
 };
 
-export const formatPriceForPEN = (
-  amount: number,
-  includeDecimals: boolean = true
-): string => {
+export const formatPriceForPEN = (amount: number, includeDecimals: boolean = true): string => {
   if (isNaN(amount)) {
     throw new Error("El monto debe ser un número válido");
   }
@@ -45,9 +40,7 @@ export const formatPriceForPEN = (
   return formatter.format(amount);
 };
 
-export const parseCounterValue = (
-  finalNumber: string | number
-): NumerParseResult => {
+export const parseCounterValue = (finalNumber: string | number): NumerParseResult => {
   if (typeof finalNumber === "number") {
     return {
       isNumber: true,
@@ -92,4 +85,24 @@ export const getIconComponent = (iconName: string): GENERAL_ICON | null => {
   }
 
   return null;
+};
+
+export const getInitials = (name: string): string => {
+  return name
+    .split(" ")
+    .map((word) => word.charAt(0))
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+};
+
+export const formatSegment = (segment: string): string => {
+  return segment
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+};
+
+export const buildPath = (segments: string[], index: number): string => {
+  return "/" + segments.slice(0, index + 1).join("/");
 };

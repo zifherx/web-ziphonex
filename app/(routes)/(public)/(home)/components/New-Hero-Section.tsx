@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-import { NUMBERS } from "@/common/utils/Constants";
+import { NUMBERS } from "@/common/constants/Constants";
 import { CardHero } from "@/components/shared/Card-Hero";
 import { MAIN_HERO_SLIDES } from "@/data";
 import { AnimatedDot } from "@/components/shared/Animated-Dot";
@@ -87,10 +87,7 @@ export function NewHeroSection() {
             className="focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full p-1"
             aria-label={`Ir a diapositiva ${index + 1}`}
           >
-            <AnimatedDot
-              isActive={index === currentSlide}
-              progress={index === currentSlide ? progress : 0}
-            />
+            <AnimatedDot isActive={index === currentSlide} progress={index === currentSlide ? progress : 0} />
           </button>
         ))}
       </div>

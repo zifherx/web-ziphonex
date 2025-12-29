@@ -1,16 +1,10 @@
 "use client";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 import { SocialMediaForm } from "./SocialMedia-Form";
 
-import { SOCIALMEDIA_DIALOG_PROP } from "@/common/types/socialmedia-props";
+import { SOCIALMEDIA_DIALOG_PROP } from "@/common/types/socialmedia.props";
 
 export function SocialMediaDialog({
   editItem,
@@ -23,20 +17,23 @@ export function SocialMediaDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+      <DialogContent
+        className="max-w-2xl max-h-[80vh] overflow-y-auto"
+        onPointerDownOutside={(e) => e.preventDefault()}
+        onEscapeKeyDown={(e) => e.preventDefault()}
+      >
         <DialogHeader>
           <DialogTitle className="text-3xl font-bold text-black">
             {isEditing ? `Editar Red Social` : "Nueva Red Social"}
           </DialogTitle>
           <DialogDescription className="text-sm font-semibold text-gray-600 ">
-            {isEditing
-              ? `Actualiza la información de la red social`
-              : `Completa los datos de la nueva red social`}
+            {isEditing ? `Actualiza la información de la red social` : `Completa los datos de la nueva red social`}
           </DialogDescription>
         </DialogHeader>
 
         <SocialMediaForm
           editItem={editItem}
+          open={open}
           onOpenChange={onOpenChange}
           onSubmit={onSubmit}
           isSubmitting={isSubmitting}

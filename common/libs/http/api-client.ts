@@ -20,9 +20,7 @@ export class APIClient {
 
   // Petición GET
   async get<T>(url: string, params?: Record<string, any>): Promise<T> {
-    return this.unwrapResponse(
-      this.httpClient.get<ApiResponse<T>>(url, { params })
-    );
+    return this.unwrapResponse(this.httpClient.get<ApiResponse<T>>(url, { params }));
   }
   // Petición POST
   async post<T>(url: string, data?: any): Promise<T> {
@@ -34,13 +32,11 @@ export class APIClient {
   }
   // Petición PATCH
   async patch<T>(url: string, data?: any): Promise<T> {
-    return this.unwrapResponse(
-      this.httpClient.patch<ApiResponse<T>>(url, data)
-    );
+    return this.unwrapResponse(this.httpClient.patch<ApiResponse<T>>(url, data));
   }
   // Petición DELETE
   async delete<T>(url: string): Promise<T> {
-    return this.unwrapResponse(this.httpClient.get<ApiResponse<T>>(url));
+    return this.unwrapResponse(this.httpClient.delete<ApiResponse<T>>(url));
   }
 }
 

@@ -1,61 +1,56 @@
 "use client";
 
+import { useEffect, useMemo } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AxeIcon, Tag } from "lucide-react";
+import { AxeIcon, Loader2, Tag } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
+
 import { DialogFooter } from "@/components/ui/dialog";
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from "@/components/ui/field";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupText,
-} from "@/components/ui/input-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Field, FieldContent, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field";
+import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 
-import {
-  UpdateSocialMediaInput,
-  updateSocialMediaSchema,
-} from "@/common/validations/social-media.validation";
-import { SOCIALMEDIA_FORM_PROP } from "@/common/types/socialmedia-props";
+import { UpdateSocialMediaInput, updateSocialMediaSchema } from "@/common/validations/social-media.validation";
+import { SOCIALMEDIA_FORM_PROP } from "@/common/types/socialmedia.props";
 
 export function SocialMediaForm({
   editItem,
+  open,
   onOpenChange,
   onSubmit,
   isSubmitting = false,
 }: SOCIALMEDIA_FORM_PROP) {
+  const isEditing = !!editItem?.id;
+
+  const defaultValues = useMemo(
+    () => ({
+      label: editItem?.label ?? "",
+      icon: editItem?.icon ?? "",
+      href: editItem?.href ?? "",
+      isActive: editItem?.isActive ?? true,
+      openInNewTab: editItem?.openInNewTab ?? true,
+      status: editItem?.status ?? "draft",
+    }),
+    [editItem]
+  );
+
   const form = useForm<UpdateSocialMediaInput>({
     resolver: zodResolver(updateSocialMediaSchema),
-    defaultValues: {
-      label: "",
-      icon: "",
-      href: "",
-      isActive: true,
-      openInNewTab: true,
-      status: "draft",
-    },
+    defaultValues,
   });
+
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, [editItem, open, defaultValues, form]);
 
   const handleClose = () => {
     onOpenChange(false);
   };
+
   return (
-    <form id="form-socialmedia" className="space-y-5">
+    <form id="form-socialmedia" className="space-y-5" onSubmit={form.handleSubmit(onSubmit)}>
       {/* <FieldGroup className="space-y-1"> */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         {/* Label */}
@@ -64,10 +59,7 @@ export function SocialMediaForm({
           control={form.control}
           render={({ field, fieldState }) => (
             <Field data-invalid={fieldState.invalid}>
-              <FieldLabel
-                className="font-bold"
-                htmlFor="form-socialmedia-label"
-              >
+              <FieldLabel className="font-bold" htmlFor="form-socialmedia-label">
                 Label
               </FieldLabel>
               <InputGroup className="h-12 border-gray-300 rounded-lg focus:ring-2 has-[[data-slot=input-group-control]:focus-visible]:ring-secondary focus:border-transparent">
@@ -77,6 +69,8 @@ export function SocialMediaForm({
                   aria-invalid={fieldState.invalid}
                   placeholder="Facebook"
                   autoComplete="off"
+                  disabled={isSubmitting}
+                  className={isSubmitting ? "cursor-not-allowed opacity-50" : ""}
                 />
                 <InputGroupAddon>
                   <Tag />
@@ -104,6 +98,8 @@ export function SocialMediaForm({
                   aria-invalid={fieldState.invalid}
                   placeholder="Facebook"
                   autoComplete="off"
+                  disabled={isSubmitting}
+                  className={isSubmitting ? "cursor-not-allowed opacity-50" : ""}
                 />
                 <InputGroupAddon>
                   <AxeIcon />
@@ -122,16 +118,18 @@ export function SocialMediaForm({
         control={form.control}
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid}>
-            <FieldLabel className="font-bold" htmlFor="form-socialmedia-icon">
+            <FieldLabel className="font-bold" htmlFor="form-socialmedia-href">
               Href
             </FieldLabel>
             <InputGroup className="h-12 border-gray-300 rounded-lg focus:ring-2 has-[[data-slot=input-group-control]:focus-visible]:ring-secondary focus:border-transparent">
               <InputGroupInput
                 {...field}
-                id="form-socialmedia-icon"
+                id="form-socialmedia-href"
                 aria-invalid={fieldState.invalid}
                 placeholder="facebook.com"
                 autoComplete="off"
+                disabled={isSubmitting}
+                className={isSubmitting ? "cursor-not-allowed opacity-50" : ""}
               />
               <InputGroupAddon>
                 <InputGroupText>https://</InputGroupText>
@@ -150,16 +148,10 @@ export function SocialMediaForm({
         render={({ field, fieldState }) => (
           <Field data-invalid={fieldState.invalid} orientation="horizontal">
             <FieldContent>
-              <FieldLabel
-                className="font-bold"
-                htmlFor="form-socialmedia-active"
-              >
+              <FieldLabel className="font-bold" htmlFor="form-socialmedia-active">
                 Activo
               </FieldLabel>
-              <FieldDescription>
-                Estado booleano que marcará si está o no habilitado.
-                Default=`true`
-              </FieldDescription>
+              <FieldDescription>Estado booleano que marcará si está o no habilitado. Default=`true`</FieldDescription>
             </FieldContent>
             <Switch
               id="form-socialmedia-active"
@@ -167,7 +159,12 @@ export function SocialMediaForm({
               checked={field.value}
               onCheckedChange={field.onChange}
               aria-invalid={fieldState.invalid}
-              className="data-[state=checked]:bg-secondary  data-[state=unchecked]:bg-gray-400"
+              disabled={isSubmitting}
+              className={
+                isSubmitting
+                  ? "cursor-not-allowed opacity-50"
+                  : "data-[state=checked]:bg-secondary  data-[state=unchecked]:bg-gray-400"
+              }
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
@@ -184,9 +181,7 @@ export function SocialMediaForm({
               <FieldLabel className="font-bold" htmlFor="form-socialmedia-tab">
                 Nuevo Tab
               </FieldLabel>
-              <FieldDescription>
-                Indica si el ícono se abrirá en otro tab del navegador
-              </FieldDescription>
+              <FieldDescription>Indica si el ícono se abrirá en otro tab del navegador</FieldDescription>
             </FieldContent>
             <Switch
               id="form-socialmedia-tab"
@@ -194,7 +189,12 @@ export function SocialMediaForm({
               checked={field.value}
               onCheckedChange={field.onChange}
               aria-invalid={fieldState.invalid}
-              className="data-[state=checked]:bg-secondary  data-[state=unchecked]:bg-gray-400"
+              disabled={isSubmitting}
+              className={
+                isSubmitting
+                  ? "cursor-not-allowed opacity-50"
+                  : "data-[state=checked]:bg-secondary  data-[state=unchecked]:bg-gray-400"
+              }
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
@@ -210,15 +210,12 @@ export function SocialMediaForm({
             <FieldLabel className="font-bold" htmlFor="form-socialmedia-status">
               Estado
             </FieldLabel>
-            <Select
-              name={field.name}
-              value={field.value}
-              onValueChange={field.onChange}
-            >
+            <Select name={field.name} value={field.value} onValueChange={field.onChange}>
               <SelectTrigger
                 id="form-socialmedia-status"
                 aria-invalid={fieldState.invalid}
-                className="border-gray-300"
+                disabled={isSubmitting}
+                className={isSubmitting ? "cursor-not-allowed opacity-50" : "border-gray-300"}
               >
                 <SelectValue placeholder="Seleccione un estado" />
               </SelectTrigger>
@@ -250,7 +247,14 @@ export function SocialMediaForm({
           className="cursor-pointer bg-secondary hover:bg-secondary/90 hover:scale-110"
           disabled={isSubmitting}
         >
-          Guardar
+          {isSubmitting ? (
+            <>
+              <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+              Guardando...
+            </>
+          ) : (
+            <>{isEditing ? "Actualizar" : "Crear"}</>
+          )}
         </Button>
       </DialogFooter>
     </form>

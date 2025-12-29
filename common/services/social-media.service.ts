@@ -5,16 +5,13 @@ import { CreateSocialMediaDto } from "../dto/social-media/create-social-media.dt
 import { UpdateSocialMediaDto } from "../dto/social-media/update-social-media.dto";
 
 import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
-import { BulkdOrderDto } from "../dto/social-media/bulk-order.dto";
 import { getSocialMediaRepository } from "../repositories/social-media.repository";
 import { STATUS_TYPE_ENTRY_CMS } from "../types/social-media.types";
 
 export class SocialMediaService implements ISocialMediaService {
   constructor(private readonly repository: ISocialMediaRepository) {}
 
-  async getAll(
-    includeInactive: boolean = false
-  ): Promise<SocialMediaResponseDto[]> {
+  async getAll(includeInactive: boolean = false): Promise<SocialMediaResponseDto[]> {
     const filters = includeInactive ? undefined : { isActive: true };
     const entities = await this.repository.findAll(filters);
     return SocialMediaResponseDto.fromEntities(entities);
@@ -50,10 +47,7 @@ export class SocialMediaService implements ISocialMediaService {
     return SocialMediaResponseDto.fromEntity(entity);
   }
 
-  async update(
-    id: string,
-    data: UpdateSocialMediaDto
-  ): Promise<SocialMediaResponseDto> {
+  async update(id: string, data: UpdateSocialMediaDto): Promise<SocialMediaResponseDto> {
     const exists = await this.repository.exists(id);
     if (!exists) {
       throw new Error("Red social no encontrada");
@@ -82,20 +76,6 @@ export class SocialMediaService implements ISocialMediaService {
     }
 
     return SocialMediaResponseDto.fromEntity(entity);
-  }
-
-  async updateBulkOrder(
-    data: BulkdOrderDto
-  ): Promise<SocialMediaResponseDto[]> {
-    for (const item of data.items) {
-      const exists = await this.repository.exists(item.id);
-      if (!exists) {
-        throw new Error(`Red social con Id ${item.id} no encontrada`);
-      }
-    }
-
-    const entities = await this.repository.updateBulkOrder(data);
-    return SocialMediaResponseDto.fromEntities(entities);
   }
 
   async toggleActive(id: string): Promise<SocialMediaResponseDto> {
@@ -134,10 +114,7 @@ export class SocialMediaService implements ISocialMediaService {
     return SocialMediaResponseDto.fromEntity(entity);
   }
 
-  async updateStatus(
-    id: string,
-    status: STATUS_TYPE_ENTRY_CMS
-  ): Promise<SocialMediaResponseDto> {
+  async updateStatus(id: string, status: STATUS_TYPE_ENTRY_CMS): Promise<SocialMediaResponseDto> {
     const exists = await this.repository.exists(id);
     if (!exists) {
       throw new Error("Red social no encontrada");

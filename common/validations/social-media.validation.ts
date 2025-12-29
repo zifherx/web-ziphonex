@@ -1,12 +1,8 @@
 import z from "zod";
 import { SocialMediaIcon } from "../types/social-media.types";
 
-export const createSocialMediaSchema = z.object({
-  label: z
-    .string()
-    .min(1, "El label es requerido")
-    .max(50, "El label no puede exceder 50 caracteres")
-    .trim(),
+export const CreateSocialMediaSchema = z.object({
+  label: z.string().min(1, "El label es requerido").max(50, "El label no puede exceder 50 caracteres").trim(),
 
   icon: z.string().min(1, "El icon es requerido"),
 
@@ -15,11 +11,7 @@ export const createSocialMediaSchema = z.object({
     .regex(/^https?:\/\/.+/, "La URL debe comenzar con http:// o https://")
     .trim(),
 
-  order: z
-    .number()
-    .int()
-    .min(0, "El orden debe ser mayor o igual a 0")
-    .optional(),
+  order: z.number().int().min(0, "El orden debe ser mayor o igual a 0").optional(),
 
   isActive: z.boolean().optional(),
 
@@ -36,18 +28,7 @@ export const createSocialMediaSchema = z.object({
     .optional(),
 });
 
-export const updateSocialMediaSchema = createSocialMediaSchema.partial();
-
-export const bulkOrderSchema = z.object({
-  items: z
-    .array(
-      z.object({
-        id: z.string().min(1, "Id es requerido"),
-        order: z.number().int().min(0),
-      })
-    )
-    .min(1, "Debe haber al menos un item"),
-});
+export const UpdateSocialMediaSchema = CreateSocialMediaSchema.partial();
 
 export const socialMedialFilterSchema = z.object({
   isActive: z
@@ -70,23 +51,18 @@ export const paginationSchema = z.object({
     .pipe(z.number().int().min(1).max(100)),
 });
 
-export type CreateSocialMediaInput = z.infer<typeof createSocialMediaSchema>;
-export type UpdateSocialMediaInput = z.infer<typeof updateSocialMediaSchema>;
-export type BulkOrderInput = z.infer<typeof bulkOrderSchema>;
+export type CreateSocialMediaInput = z.infer<typeof CreateSocialMediaSchema>;
+export type UpdateSocialMediaInput = z.infer<typeof UpdateSocialMediaSchema>;
 export type SocialMediaFiltersInput = z.infer<typeof socialMedialFilterSchema>;
 export type PaginationInput = z.infer<typeof paginationSchema>;
 
 export class SocialMediaValidator {
   static validateCreate(data: unknown): CreateSocialMediaInput {
-    return createSocialMediaSchema.parse(data);
+    return CreateSocialMediaSchema.parse(data);
   }
 
   static validateUpdate(data: unknown): UpdateSocialMediaInput {
-    return updateSocialMediaSchema.parse(data);
-  }
-
-  static validateBulkOrder(data: unknown): BulkOrderInput {
-    return bulkOrderSchema.parse(data);
+    return UpdateSocialMediaSchema.parse(data);
   }
 
   static validateFilters(data: unknown): SocialMediaFiltersInput {
@@ -99,11 +75,11 @@ export class SocialMediaValidator {
 
   // Validación segura
   static safeValidateCreate(data: unknown) {
-    return createSocialMediaSchema.safeParse(data);
+    return CreateSocialMediaSchema.safeParse(data);
   }
 
   static safeValidationUpdate(data: unknown) {
-    return updateSocialMediaSchema.safeParse(data);
+    return UpdateSocialMediaSchema.safeParse(data);
   }
 }
 

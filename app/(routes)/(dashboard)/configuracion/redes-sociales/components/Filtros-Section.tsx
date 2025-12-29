@@ -3,11 +3,7 @@
 import { Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import {
   Select,
   SelectContent,
@@ -18,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-import { SOCIALMEDIA_FILTROS_PROPS } from "@/common/types/socialmedia-props";
+import { SOCIALMEDIA_FILTROS_PROPS } from "@/common/types/socialmedia.props";
 
 export function FiltrosSection({
   iconNameFilter,
@@ -37,6 +33,7 @@ export function FiltrosSection({
             placeholder="Filtro de búsqueda"
             value={iconNameFilter}
             onChange={(e) => onIconNameFilterChange(e.target.value)}
+            disabled={view === "card"}
           />
           <InputGroupAddon>
             <Search className="w-5 h-5 text-gray-400" />

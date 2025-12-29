@@ -19,6 +19,7 @@ export type SOCIALMEDIA_DIALOG_PROP = {
 };
 
 export type SOCIALMEDIA_FORM_PROP = {
+  open: boolean;
   onOpenChange: Dispatch<SetStateAction<boolean>>;
   editItem: SocialMediaResponseDto | null;
   onSubmit: (data: UpdateSocialMediaInput) => void;
@@ -54,6 +55,9 @@ export type SOCIALMEDIA_CONTENT_PROPS = {
   view: "table" | "card";
   iconNameFilter: string;
   statusFilter: string;
+  isDeleting?: boolean;
+  isUpdating?: boolean;
+  processingItemId?: string | null;
   onEdit: (socialMedia: SocialMediaResponseDto) => void;
   onDelete: (socialMedia: SocialMediaResponseDto) => void;
 };
@@ -61,6 +65,15 @@ export type SOCIALMEDIA_CONTENT_PROPS = {
 export type SOCIALMEDIA_TABLE_VIEW_PROPS = {
   filteredItems: SocialMediaResponseDto[];
   iconNameFilter: string;
+  onEdit: (item: SocialMediaResponseDto) => void;
+  onDelete: (item: SocialMediaResponseDto) => void;
+};
+
+export type SOCIALMEDIA_CARD_VIEW_PROPS = {
+  filteredItems: SocialMediaResponseDto[];
+  isDeleting?: boolean;
+  isUpdating?: boolean;
+  processingItemId?: string | null;
   onEdit: (item: SocialMediaResponseDto) => void;
   onDelete: (item: SocialMediaResponseDto) => void;
 };

@@ -2,9 +2,10 @@
 
 import { useMemo } from "react";
 
-import { SOCIALMEDIA_CONTENT_PROPS } from "@/common/types/socialmedia-props";
 import { ContentCardView } from "./Content-Card-View";
 import { ContentTableView } from "./Content-Table-View";
+
+import { SOCIALMEDIA_CONTENT_PROPS } from "@/common/types/socialmedia.props";
 
 export function ContentSection({
   isLoading,
@@ -14,12 +15,15 @@ export function ContentSection({
   onEdit,
   statusFilter,
   view,
+  isDeleting,
+  isUpdating,
+  processingItemId,
 }: SOCIALMEDIA_CONTENT_PROPS) {
   const filteredData = useMemo(() => {
     if (statusFilter === "all") {
       return items;
     }
-    return items.filter((item) => item);
+    return items.filter((item) => item.status === statusFilter);
   }, [items, statusFilter]);
 
   if (isLoading) {
@@ -51,7 +55,14 @@ export function ContentSection({
           onDelete={onDelete}
         />
       ) : (
-        <ContentCardView />
+        <ContentCardView
+          filteredItems={filteredData}
+          onEdit={onEdit}
+          onDelete={onDelete}
+          processingItemId={processingItemId}
+          isDeleting={isDeleting}
+          isUpdating={isUpdating}
+        />
       )}
     </div>
   );

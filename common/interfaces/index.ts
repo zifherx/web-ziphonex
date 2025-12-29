@@ -1,5 +1,6 @@
 import { ComponentPropsWithoutRef, ReactNode } from "react";
 import { BUSINESS_LINE, CATEGORY_SERVICE, GENERAL_ICON } from "../types";
+import { LucideIcon } from "lucide-react";
 
 export interface IGeneral {
   id: number;
@@ -208,4 +209,13 @@ export interface IIconMapItem {
   icon: GENERAL_ICON;
   color: string;
   name: string;
+}
+
+export interface IIndicator {
+  id: number;
+  title: string;
+  value: number;
+  icon: LucideIcon;
+  bgIcon: string;
+  colorIcon: string;
 }

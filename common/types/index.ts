@@ -4,6 +4,7 @@ import {
   IFloatingIcon,
   IHeaderMenu,
   IHeroSlide,
+  IIndicator,
   IPrincipios_Nosotros,
   IProcess,
   IService,
@@ -13,6 +14,7 @@ import {
 } from "../interfaces";
 import { LucideIcon } from "lucide-react";
 import { IconType } from "react-icons";
+import { STATUS_TYPE_ENTRY_CMS } from "./social-media.types";
 
 export type GENERAL_TYPE = {
   children: ReactNode;
@@ -33,11 +35,7 @@ export type BOTTOM_BAR_PROP = {
 
 export type GENERAL_ICON = LucideIcon | IconType;
 
-export type CATEGORY_SERVICE =
-  | "DESARROLLO"
-  | "MARKETING"
-  | "CONSULTORIA"
-  | "E-COMMERCE";
+export type CATEGORY_SERVICE = "DESARROLLO" | "MARKETING" | "CONSULTORIA" | "E-COMMERCE";
 
 export type ANIMATED_DOT_PROP = {
   isActive: boolean;
@@ -146,4 +144,55 @@ export type SERVICE_GRID_PROP = {
 
 export type SERVICE_INFO_PROP = {
   service: IService;
+};
+
+export type BADGE_STATUS_PROP = {
+  status: STATUS_TYPE_ENTRY_CMS;
+};
+
+export interface IIndicatorsProps<T> {
+  data: T[];
+  isLoading: boolean;
+  indicators: IIndicator[];
+}
+
+export type GenericDeleteDialogProps<TItem = any> = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  item: TItem | null;
+  onConfirm: () => void;
+  isDeleting?: boolean;
+  title?: string;
+  description?: ReactNode;
+  getItemName?: (item: TItem) => string;
+  confirmText?: string;
+  cancelText?: string;
+  confirmIcon?: ReactNode;
+  confirmButtonClass?: string;
+};
+
+export type GenericDialogProps<TItem = any> = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  editedItem: TItem | null;
+  createTitle?: string;
+  editTitle?: string;
+  createDescription?: string;
+  editDescription?: string;
+  children: ReactNode;
+  className?: string;
+  prevenOutsideClick?: boolean;
+  preventEscapeClose?: boolean;
+  maxWidth?: "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+  isDirty?: boolean;
+  confirmCloseTitle?: string;
+  confirmCloseDescription?: string;
+};
+
+export type ImageUploadProps = {
+  value?: string;
+  onChange: (url: string) => void;
+  onRemove?: () => void;
+  disabled?: boolean;
+  variant?: "button" | "dropzone";
 };

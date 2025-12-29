@@ -17,24 +17,12 @@ import {
 } from "@tanstack/react-table";
 
 import { Button } from "@/components/ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
-import { SOCIALMEDIA_TABLE_VIEW_PROPS } from "@/common/types/socialmedia-props";
+import { SOCIALMEDIA_TABLE_VIEW_PROPS } from "@/common/types/socialmedia.props";
 import { SocialMediaColumn } from "@/common/columns/social-media.column";
 
-export function ContentTableView({
-  filteredItems,
-  iconNameFilter,
-  onDelete,
-  onEdit,
-}: SOCIALMEDIA_TABLE_VIEW_PROPS) {
+export function ContentTableView({ filteredItems, iconNameFilter, onDelete, onEdit }: SOCIALMEDIA_TABLE_VIEW_PROPS) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -82,9 +70,7 @@ export function ContentTableView({
             <TableRow key={id}>
               {headers.map(({ id, isPlaceholder, column, getContext }) => (
                 <TableHead key={id}>
-                  {isPlaceholder
-                    ? null
-                    : flexRender(column.columnDef.header, getContext())}
+                  {isPlaceholder ? null : flexRender(column.columnDef.header, getContext())}
                 </TableHead>
               ))}
             </TableRow>
@@ -94,63 +80,35 @@ export function ContentTableView({
           {socialMediaTable.getRowModel().rows.length ? (
             socialMediaTable
               .getRowModel()
-              .rows.map(
-                ({
-                  id,
-                  getIsSelected,
-                  getVisibleCells,
-                  getIsExpanded,
-                  getToggleExpandedHandler,
-                  subRows,
-                }) => (
-                  <TableRow key={id} data-state={getIsSelected() && "selected"}>
-                    {getVisibleCells().map(
-                      ({
-                        id,
-                        column,
-                        getContext,
-                        getIsGrouped,
-                        getIsAggregated,
-                        getIsPlaceholder,
-                      }) => (
-                        <TableCell key={id}>
-                          {getIsGrouped() ? (
-                            <>
-                              <Button
-                                variant="ghost"
-                                className="mr-2"
-                                onClick={() => getToggleExpandedHandler()()}
-                              >
-                                {getIsExpanded() ? (
-                                  <ChevronDown className="h-4 w-4" />
-                                ) : (
-                                  <ChevronRight className="h-4 w-4" />
-                                )}
-                              </Button>
-                              {flexRender(column.columnDef.cell, getContext())}{" "}
-                              ({subRows.length})
-                            </>
-                          ) : getIsAggregated() ? (
-                            flexRender(
-                              column.columnDef.aggregatedCell ??
-                                column.columnDef.cell,
-                              getContext()
-                            )
-                          ) : getIsPlaceholder() ? null : (
-                            flexRender(column.columnDef.cell, getContext())
-                          )}
-                        </TableCell>
-                      )
-                    )}
-                  </TableRow>
-                )
-              )
+              .rows.map(({ id, getIsSelected, getVisibleCells, getIsExpanded, getToggleExpandedHandler, subRows }) => (
+                <TableRow key={id} data-state={getIsSelected() && "selected"}>
+                  {getVisibleCells().map(
+                    ({ id, column, getContext, getIsGrouped, getIsAggregated, getIsPlaceholder }) => (
+                      <TableCell key={id}>
+                        {getIsGrouped() ? (
+                          <>
+                            <Button variant="ghost" className="mr-2" onClick={() => getToggleExpandedHandler()()}>
+                              {getIsExpanded() ? (
+                                <ChevronDown className="h-4 w-4" />
+                              ) : (
+                                <ChevronRight className="h-4 w-4" />
+                              )}
+                            </Button>
+                            {flexRender(column.columnDef.cell, getContext())} ({subRows.length})
+                          </>
+                        ) : getIsAggregated() ? (
+                          flexRender(column.columnDef.aggregatedCell ?? column.columnDef.cell, getContext())
+                        ) : getIsPlaceholder() ? null : (
+                          flexRender(column.columnDef.cell, getContext())
+                        )}
+                      </TableCell>
+                    )
+                  )}
+                </TableRow>
+              ))
           ) : (
             <TableRow>
-              <TableCell
-                colSpan={SocialMediaColumn.length}
-                className="h-24 text-center"
-              >
+              <TableCell colSpan={SocialMediaColumn.length} className="h-24 text-center">
                 No se encontraron testimonios.
               </TableCell>
             </TableRow>
@@ -161,8 +119,7 @@ export function ContentTableView({
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="flex-1 text-sm text-muted-foreground">
           {socialMediaTable.getFilteredSelectedRowModel().rows.length} de{" "}
-          {socialMediaTable.getFilteredRowModel().rows.length} fila(s)
-          seleccionadas.
+          {socialMediaTable.getFilteredRowModel().rows.length} fila(s) seleccionadas.
         </div>
         <div className="flex space-x-2 items-center">
           <Button

@@ -1,15 +1,10 @@
 import { FilterQuery } from "mongoose";
 import { ISocialMediaRepository } from "../interfaces/repositories/social-media.repository.interface";
 import { connectDB } from "../libs/mongoose";
-import {
-  SocialMediaEntity,
-  SocialMediaFilters,
-  STATUS_TYPE_ENTRY_CMS,
-} from "../types/social-media.types";
+import { SocialMediaEntity, SocialMediaFilters, STATUS_TYPE_ENTRY_CMS } from "../types/social-media.types";
 import { SocialMediaModel } from "../models/SocialMedia";
 import { CreateSocialMediaDto } from "../dto/social-media/create-social-media.dto";
 import { UpdateSocialMediaDto } from "../dto/social-media/update-social-media.dto";
-import { BulkdOrderDto } from "../dto/social-media/bulk-order.dto";
 
 export class SocialMediaRepository implements ISocialMediaRepository {
   private async ensureConnection() {
@@ -45,10 +40,7 @@ export class SocialMediaRepository implements ISocialMediaRepository {
       query.icon = filters.icon;
     }
 
-    const docs = await SocialMediaModel.find(query)
-      .sort({ order: 1 })
-      .lean()
-      .exec();
+    const docs = await SocialMediaModel.find(query).sort({ order: 1 }).lean().exec();
 
     return docs.map((doc) => this.mapToEntity(doc));
   }
@@ -79,17 +71,10 @@ export class SocialMediaRepository implements ISocialMediaRepository {
     return this.mapToEntity(doc.toObject());
   }
 
-  async update(
-    id: string,
-    data: UpdateSocialMediaDto
-  ): Promise<SocialMediaEntity | null> {
+  async update(id: string, data: UpdateSocialMediaDto): Promise<SocialMediaEntity | null> {
     await this.ensureConnection();
 
-    const doc = await SocialMediaModel.findByIdAndUpdate(
-      id,
-      { $set: data },
-      { new: true, runValidators: true }
-    )
+    const doc = await SocialMediaModel.findByIdAndUpdate(id, { $set: data }, { new: true, runValidators: true })
       .lean()
       .exec();
 
@@ -110,21 +95,6 @@ export class SocialMediaRepository implements ISocialMediaRepository {
     return this.mapToEntity(doc);
   }
 
-  async updateBulkOrder(data: BulkdOrderDto): Promise<SocialMediaEntity[]> {
-    await this.ensureConnection();
-
-    const bulkOps = data.items.map((item) => ({
-      updateOne: {
-        filter: { _id: item.id },
-        update: { $set: { order: item.order } },
-      },
-    }));
-
-    await SocialMediaModel.bulkWrite(bulkOps);
-
-    return this.findAll();
-  }
-
   async toggleActive(id: string): Promise<SocialMediaEntity | null> {
     await this.ensureConnection();
 
@@ -140,10 +110,7 @@ export class SocialMediaRepository implements ISocialMediaRepository {
   async reorderAfterDelete(deletedOrder: number): Promise<void> {
     await this.ensureConnection();
 
-    await SocialMediaModel.updateMany(
-      { order: { $gt: deletedOrder } },
-      { $inc: { order: -1 } }
-    );
+    await SocialMediaModel.updateMany({ order: { $gt: deletedOrder } }, { $inc: { order: -1 } });
   }
 
   async getNextOrder(): Promise<number> {
@@ -203,17 +170,10 @@ export class SocialMediaRepository implements ISocialMediaRepository {
     return this.mapToEntity(doc.toObject());
   }
 
-  async updateStatus(
-    id: string,
-    status: STATUS_TYPE_ENTRY_CMS
-  ): Promise<SocialMediaEntity | null> {
+  async updateStatus(id: string, status: STATUS_TYPE_ENTRY_CMS): Promise<SocialMediaEntity | null> {
     await this.ensureConnection();
 
-    const doc = await SocialMediaModel.findByIdAndUpdate(
-      id,
-      { $set: { status } },
-      { new: true, runValidators: true }
-    )
+    const doc = await SocialMediaModel.findByIdAndUpdate(id, { $set: { status } }, { new: true, runValidators: true })
       .lean()
       .exec();
 

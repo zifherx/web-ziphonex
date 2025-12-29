@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { SocialMediaResponseDto } from "../dto/social-media/social-media-response.dto";
 import { getIconComponent } from "../utils/GlobalFunctions";
+import { BadgeStatus } from "@/components/shared/Badge-Status";
 
 export const SocialMediaColumn: ColumnDef<SocialMediaResponseDto>[] = [
   {
@@ -82,13 +83,18 @@ export const SocialMediaColumn: ColumnDef<SocialMediaResponseDto>[] = [
     ),
   },
   {
-    accessorKey: "status",
-    header: () => <div className="text-left text-sm">Estado</div>,
+    accessorKey: "isActive",
+    header: () => <div className="text-left text-sm">Activo</div>,
     cell: ({ row }) => (
       <Badge variant={row.original.isActive ? "default" : "destructive"}>
         {row.original.isActive ? "Activo" : "Inactivo"}
       </Badge>
     ),
+  },
+  {
+    accessorKey: "status",
+    header: () => <div className="text-left text-sm">Estado</div>,
+    cell: ({ row }) => <BadgeStatus status={row.original.status} />,
   },
   {
     accessorKey: "createdAt",
